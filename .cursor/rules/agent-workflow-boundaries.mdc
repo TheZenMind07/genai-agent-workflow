@@ -47,8 +47,10 @@ For planned work, follow this agent chain:
 - `AGENTS.md` — broad defaults for all agents (optional, in the consuming repo).
 - `.cursor/agents/*.mdc` — role-specific workflow and responsibility guidance (this repo); keep
   tech-stack agnostic.
-- `.cursor/rules/*.mdc` — workflow enforcement in this repo; stack-specific rules (e.g.
-  `node24-*` from [genai_node_rules](https://github.com/ola-mobility/genai_node_rules)) install
-  into the same `.cursor/rules/` from sibling standards repos.
+- `.cursor/rules/*.mdc` — workflow enforcement in this repo; optional stack-specific rules from
+  sibling standards repos (e.g. [genai_node_rules](https://github.com/ola-mobility/genai_node_rules),
+  [genai_ts_rules](https://github.com/ola-mobility/genai_ts_rules),
+  [genai_js_rules](https://github.com/ola-mobility/genai_js_rules)) may install into the same
+  `.cursor/rules/` directory in consuming repos — teams merge only what their stack needs.
 - Keep feature-specific API details, endpoint matrices, incident notes, and one-off facts in
   planning, execution, test-report, or investigation docs — not in agent or rule files.

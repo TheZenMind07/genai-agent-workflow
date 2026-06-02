@@ -42,11 +42,7 @@ Include **Summary**, **Files Changed**, **Why Changed**, **Verification**,
 ## Rules To Follow
 
 - `.cursor/rules/agent-workflow-boundaries.mdc` (this repo)
-- Stack-specific rules below require [genai_node_rules](https://github.com/ola-mobility/genai_node_rules)
-  (or equivalent) merged into `.cursor/rules/`:
-- `.cursor/rules/node24-runtime-style.mdc`
-- `.cursor/rules/node24-typescript.mdc`
-- `.cursor/rules/node24-javascript.mdc`
-- `.cursor/rules/node24-architecture.mdc`
-- `.cursor/rules/node24-security.mdc`
-- `.cursor/rules/node24-linting.mdc`
+- When the consuming repo merges stack-specific standards into `.cursor/rules/`, follow those
+  rules for coding style, architecture, security, and linting. This repo does not prescribe
+  paths or layer names — use whatever stack rules are present in the project's `.cursor/rules/`
+  tree (optional sibling repos such as genai_node_rules, genai_ts_rules, or genai_js_rules).

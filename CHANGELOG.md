@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-06-03
+
+### Changed
+
+- Made agent workflow and subagent definitions framework-agnostic — no Node.js, TypeScript, or stack-specific rule paths in agents; optional sibling standards repos documented as merge-as-needed
+
 ## [1.0.0] - 2026-06-03
 
 ### Added
@@ -20,5 +26,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - `phase-executor`, `doc-sync`, `test-runner`, `rule-feedback-writer`
 - Extracted from [genai_node_rules](https://github.com/ola-mobility/genai_node_rules) to keep Node standards focused on development conventions only
 
-[Unreleased]: https://github.com/ola-mobility/genai_agent_rules/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/ola-mobility/genai_agent_rules/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/ola-mobility/genai_agent_rules/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/ola-mobility/genai_agent_rules/releases/tag/v1.0.0

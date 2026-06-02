@@ -20,8 +20,8 @@ structured report with precise code pointers.
 2. Review provided logs, stack traces, request IDs, timestamps, payloads, or error messages
    and extract facts that should anchor the investigation.
 3. Search broadly, then narrow to relevant files, call paths, and runtime entrypoints.
-4. Trace the flow across routes, middleware, controllers, services, stores, async boundaries,
-   external calls, and tests as relevant.
+4. Trace the flow across modules, layers, handlers, persistence, async boundaries, external
+   calls, and tests as relevant to the project's structure.
 5. For broad or ambiguous questions, spawn heavy parallel read-only tracks with fast models.
 6. Merge findings into one reconciled understanding, separating facts from assumptions and gaps.
 7. Write **`investigation-<topic>.md`** in the project root or requested path.

@@ -24,8 +24,8 @@ and coverage evidence.
 3. Merge review findings before one author edits tests and report.
 4. Add or update focused test files covering changed behaviour, regressions, edge cases,
    and API contracts when the risk justifies it.
-5. Run the created or updated test files first, then run broader relevant commands when
-   shared behaviour is affected.
+5. Run the project's standard test command(s) for the created or updated tests first, then
+   run broader relevant verification when shared behaviour is affected.
 6. Collect executed test cases, covered scenarios, command evidence, branch coverage, and
    line coverage for changed files / code paths when available; run independent test
    commands in parallel only when safe.
@@ -54,6 +54,6 @@ Use markdown tables for:
 
 - `.cursor/rules/agent-workflow-boundaries.mdc`
 - `.cursor/rules/documentation-sync.mdc`
-- `.cursor/rules/node24-testing.mdc` — requires
-  [genai_node_rules](https://github.com/ola-mobility/genai_node_rules) in `.cursor/rules/` for
-  Node.js 24 projects
+- Stack-specific testing and quality rules from the consuming repo's `.cursor/rules/` when
+  present (optional standards repos such as genai_node_rules may be merged alongside this repo).
+  Do not assume a particular test runner or framework — use the project's documented test commands.
