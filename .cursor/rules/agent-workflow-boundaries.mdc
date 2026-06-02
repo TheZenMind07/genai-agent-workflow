@@ -1,0 +1,54 @@
+---
+description: Agent lifecycle, parallelisation, and guidance placement boundaries
+alwaysApply: true
+---
+
+# Agent Workflow Boundaries
+
+## Lifecycle Order
+
+For planned work, follow this agent chain:
+
+1. **`requirement-refinement`** — when the feature request is vague or incomplete.
+2. **`code-investigator`** — when existing behaviour or architecture must be understood first.
+3. **`architect-planner`** — produces a phased plan under `docs/feature/<slug>.md`.
+4. **`phase-executor`** — implements one approved phase per pass.
+5. **`doc-sync`** — syncs implementation status back into the planning doc immediately after execution.
+6. **`test-runner`** — reviews diff, adds/updates tests, runs verification, writes test report.
+7. **`doc-sync`** again — syncs verification status, coverage, and residual risk into the planning doc.
+8. **`rule-feedback-writer`** — persists any durable guidance changes raised during the above steps.
+
+## Handoff Rules
+
+- After `phase-executor` completes, hand off to `doc-sync` **before** verification so the
+  planning doc captures implementation status, changed files, risks, pending work, and next phase.
+- After that doc sync, hand off to `test-runner` to review the diff, add/update tests, run
+  verification, and write a test execution report under `docs/test-reports/`.
+- After `test-runner` writes the report, hand off to `doc-sync` again to sync verification
+  status, coverage, failures, and residual risk back into the planning doc.
+
+## Parallelisation Policy
+
+- Parallelise **thinking and read-only analysis** only.
+- Never parallelise writes to product code, tests, config, reports, or plan files.
+- Use fast models for parallel read-only subagents.
+- Keep final code, test, config, report, and plan-file edits **single-writer**.
+
+## Responsibility Boundaries
+
+- `phase-executor` must not create or update planning docs, execution notes, or test reports.
+- `architect-planner` must not implement application code, tests, or configuration.
+- `doc-sync` must not modify product code or tests unless explicitly instructed.
+- `test-runner` must not claim tests passed without real command output evidence.
+- `rule-feedback-writer` must not persist one-off or task-specific facts.
+
+## Guidance Placement
+
+- `AGENTS.md` — broad defaults for all agents (optional, in the consuming repo).
+- `.cursor/agents/*.mdc` — role-specific workflow and responsibility guidance (this repo); keep
+  tech-stack agnostic.
+- `.cursor/rules/*.mdc` — workflow enforcement in this repo; stack-specific rules (e.g.
+  `node24-*` from [genai_node_rules](https://github.com/ola-mobility/genai_node_rules)) install
+  into the same `.cursor/rules/` from sibling standards repos.
+- Keep feature-specific API details, endpoint matrices, incident notes, and one-off facts in
+  planning, execution, test-report, or investigation docs — not in agent or rule files.

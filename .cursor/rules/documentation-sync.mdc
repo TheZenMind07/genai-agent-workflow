@@ -1,0 +1,43 @@
+---
+description: Rules for keeping planning docs, execution notes, and test reports consistent
+globs:
+  - "docs/**/*.md"
+---
+
+# Documentation Sync
+
+## Sync Points
+
+`doc-sync` must be invoked at exactly two points per phase:
+
+1. **After `phase-executor` completes** — to capture implementation status, changed files,
+   risks, pending work, and next phase in the planning doc.
+2. **After `test-runner` writes the test report** — to sync verification status, coverage,
+   failures, and residual risk back into the planning doc.
+
+## What `doc-sync` May Update
+
+- Phase status values in the planning doc's Implementation Status table.
+- Phase detail sections: mark steps complete, add notes, link test reports.
+- Execution notes: ensure they contain enough context for future verification.
+
+## What `doc-sync` Must Not Do
+
+- Modify product code, tests, or runtime configuration.
+- Invent status or evidence; use `Unknown` or `Not Run` when data is missing.
+- Create new planning docs or test reports (those belong to `architect-planner` and
+  `test-runner` respectively).
+
+## Evidence Requirements
+
+- Every status change to `Verified` must reference a test report path.
+- Every status change to `Implemented` must list the changed files.
+- Do not change status to `Verified` based on assertions alone; require command output.
+
+## File Ownership
+
+| File pattern | Owner (creates) | Owner (updates) |
+|---|---|---|
+| `docs/feature/<slug>.md` | `architect-planner` | `doc-sync` |
+| `docs/test-reports/<slug>.md` | `test-runner` | `test-runner`, then `doc-sync` links |
+| `investigation-<topic>.md` | `code-investigator` | `code-investigator` |

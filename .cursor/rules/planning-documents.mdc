@@ -1,0 +1,54 @@
+---
+description: Structure and content requirements for planning documents
+globs:
+  - "docs/feature/**/*.md"
+---
+
+# Planning Documents
+
+## Location
+
+All feature plans live under **`docs/feature/<feature-slug>.md`**.
+One file per feature; do not split a single feature plan across multiple files.
+
+## Required Sections
+
+Every planning document must include the following sections in order:
+
+1. **Goal** — one paragraph describing the desired outcome and motivation.
+2. **Scope** — what is included in this plan.
+3. **Non-Goals** — what is explicitly excluded.
+4. **Dependencies** — other features, services, or teams this plan depends on.
+5. **Assumptions** — facts assumed true without verification.
+6. **Open Questions** — unresolved questions with an owner and due date.
+7. **API Changes** — list of APIs that will change or be newly introduced; include request
+   shape, response shape, status codes, validation, auth, and compatibility notes.
+8. **Data / Storage Changes** — schema impacts, migrations, indexes, backfill needs,
+   and rollback considerations (omit section if no storage changes).
+9. **Sequence Diagrams** — Mermaid sequence diagrams for non-trivial user or service flows.
+10. **Phase Implementation Status** — table with columns: Phase, Title, Status, Notes.
+11. **Phases** — one `##` sub-section per phase; each must include:
+    - Objective
+    - Implementation steps (numbered)
+    - Expected outputs
+    - Rollback procedure
+    - Testing strategy
+
+## Phase Status Values
+
+Use exactly these values in the status table:
+
+| Value | Meaning |
+|---|---|
+| `Not Started` | No implementation begun |
+| `In Progress` | Partially implemented |
+| `Implemented` | Code written, not yet verified |
+| `Verified` | Tests passed with command evidence |
+| `Blocked` | Cannot proceed; reason in Notes |
+
+## Rules
+
+- Mark the document `DRAFT` at the top until the requester confirms it is complete.
+- Do not store feature-specific facts in agent or rule files; keep them here.
+- `doc-sync` is the only agent permitted to update the Phase Implementation Status table
+  without explicit user instruction.
