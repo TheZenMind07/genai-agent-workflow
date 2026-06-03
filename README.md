@@ -8,8 +8,9 @@ Organization-wide **Cursor agent workflow** rules and subagent definitions for A
 
 This repository provides:
 
-- **Workflow rules** (`.cursor/rules/`) — agent lifecycle, planning doc structure, and documentation sync
+- **Workflow rules** (`.cursor/rules/`) — agent lifecycle, SDD structure under `docs/sdd/`, ADRs, and documentation sync
 - **Subagent definitions** (`.cursor/agents/`) — requirement refinement, planning, execution, testing, and doc sync roles
+- **ADR scaffold** (`.cursor/adr/`) — template and README for architectural decision records in consuming repos
 
 Agent guidance is **framework-agnostic** (tech-stack neutral). It does not assume Node.js, Express, TypeScript, or any specific language, runtime, or test runner. Pair this repo with language/runtime standards repos when your stack needs them.
 
@@ -22,7 +23,7 @@ Agent guidance is **framework-agnostic** (tech-stack neutral). It does not assum
 | TypeScript conventions | [genai_ts_rules](https://github.com/ola-mobility/genai_ts_rules) *(optional)* |
 | JavaScript baseline | [genai_js_rules](https://github.com/ola-mobility/genai_js_rules) *(optional)* |
 
-Use **genai_agent_rules** when your team runs the requirement → investigate → plan → execute → verify agent chain with `docs/feature/` plans and `docs/test-reports/`.
+Use **genai_agent_rules** when your team runs the requirement → investigate → plan → execute → verify agent chain with `docs/sdd/` design specs and `docs/test-reports/`.
 
 Use optional sibling standards repos for how code is written in a given stack — coding style, architecture patterns, linting, security, and testing conventions. Merge only the repos your project needs into the same `.cursor/rules/` tree; agents follow whatever stack rules are present there.
 
@@ -34,6 +35,7 @@ Install this repo first for workflow agents and rules, then merge optional stack
 # Agent workflow (required for the subagent chain)
 cp -r /path/to/genai_agent_rules/.cursor/agents /path/to/your-project/.cursor/
 cp -r /path/to/genai_agent_rules/.cursor/rules/* /path/to/your-project/.cursor/rules/
+cp -r /path/to/genai_agent_rules/.cursor/adr /path/to/your-project/.cursor/
 
 # Optional: stack-specific coding standards (example — use only what your stack needs)
 cp -r /path/to/genai_node_rules/.cursor/rules/* /path/to/your-project/.cursor/rules/
@@ -51,9 +53,17 @@ genai_agent_rules/
 ├── CHANGELOG.md
 ├── OWNERS.md
 │
+├── docs/
+│   └── sdd/
+│       └── README.md
+│
 └── .cursor/
+    ├── adr/
+    │   ├── README.md
+    │   └── 0000-template.md
     ├── rules/
     │   ├── agent-workflow-boundaries.mdc
+    │   ├── architectural-decisions.mdc
     │   ├── planning-documents.mdc
     │   └── documentation-sync.mdc
     └── agents/
@@ -74,6 +84,7 @@ Copy or symlink into your project (merge with any existing `.cursor/` content):
 # From a clone of this repo
 cp -r .cursor/rules/*   /path/to/your-project/.cursor/rules/
 cp -r .cursor/agents/*  /path/to/your-project/.cursor/agents/
+cp -r .cursor/adr       /path/to/your-project/.cursor/
 ```
 
 Or add as a submodule and link both `rules` and `agents` directories.
@@ -85,7 +96,8 @@ In Cursor, subagents are available when `.cursor/agents/*.mdc` is present; workf
 | Rule | Focus |
 |------|-------|
 | `agent-workflow-boundaries.mdc` | Subagent lifecycle, handoffs, parallelisation |
-| `planning-documents.mdc` | Feature plans under `docs/feature/` |
+| `architectural-decisions.mdc` | ADRs under `.cursor/adr/` and agent ownership |
+| `planning-documents.mdc` | Feature design specs (SDDs) under `docs/sdd/` |
 | `documentation-sync.mdc` | Sync plan docs after implementation and verification |
 
 ## Subagents

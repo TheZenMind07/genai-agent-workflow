@@ -4,7 +4,7 @@ Thank you for helping evolve org-wide agent workflow standards. Changes here sho
 
 ## What belongs here
 
-- **In scope** — Subagent roles, handoffs, planning doc structure, documentation sync, and workflow boundaries that are not tied to a single language or framework.
+- **In scope** — Subagent roles, handoffs, SDD structure under `docs/sdd/`, ADR conventions under `.cursor/adr/`, documentation sync, and workflow boundaries that are not tied to a single language or framework.
 - **Out of scope** — Language/runtime coding standards, lint rules, framework-specific architecture, or project-specific app configuration. Those belong in optional sibling standards repos (e.g. [genai_node_rules](https://github.com/ola-mobility/genai_node_rules), [genai_ts_rules](https://github.com/ola-mobility/genai_ts_rules), [genai_js_rules](https://github.com/ola-mobility/genai_js_rules)) or the consuming repo.
 
 ## How to propose a change
@@ -17,7 +17,7 @@ Thank you for helping evolve org-wide agent workflow standards. Changes here sho
 ## File guidelines
 
 - Keep **agents** framework-agnostic; do not hard-code language, framework, or test-runner paths. Mention optional sibling standards repos only as examples teams may merge into `.cursor/rules/`.
-- Keep **workflow rules** focused on lifecycle, planning docs, and doc sync — one theme per file.
+- Keep **workflow rules** focused on lifecycle, SDDs under `docs/sdd/`, ADRs, and doc sync — one theme per file.
 - Use frontmatter (`description`, `globs`, `alwaysApply`) consistently with existing files.
 - Prefer imperative bullets; avoid duplicating guidance across agent and rule files.
 

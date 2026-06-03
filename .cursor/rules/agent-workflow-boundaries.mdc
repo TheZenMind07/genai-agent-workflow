@@ -11,7 +11,8 @@ For planned work, follow this agent chain:
 
 1. **`requirement-refinement`** — when the feature request is vague or incomplete.
 2. **`code-investigator`** — when existing behaviour or architecture must be understood first.
-3. **`architect-planner`** — produces a phased plan under `docs/feature/<slug>.md`.
+3. **`architect-planner`** — produces a phased plan under `docs/sdd/<slug>.md`; creates or
+   updates ADRs under `.cursor/adr/` when the work introduces durable architectural decisions.
 4. **`phase-executor`** — implements one approved phase per pass.
 5. **`doc-sync`** — syncs implementation status back into the planning doc immediately after execution.
 6. **`test-runner`** — reviews diff, adds/updates tests, runs verification, writes test report.
@@ -30,14 +31,16 @@ For planned work, follow this agent chain:
 ## Parallelisation Policy
 
 - Parallelise **thinking and read-only analysis** only.
-- Never parallelise writes to product code, tests, config, reports, or plan files.
+- Never parallelise writes to product code, tests, config, reports, plan files, or ADRs.
 - Use fast models for parallel read-only subagents.
 - Keep final code, test, config, report, and plan-file edits **single-writer**.
 
 ## Responsibility Boundaries
 
-- `phase-executor` must not create or update planning docs, execution notes, or test reports.
+- `phase-executor` must not create or update planning docs, execution notes, test reports, or ADRs.
 - `architect-planner` must not implement application code, tests, or configuration.
+- `architect-planner` should record durable cross-cutting decisions in `.cursor/adr/` (see
+  `architectural-decisions.mdc`), not only in SDDs under `docs/sdd/`.
 - `doc-sync` must not modify product code or tests unless explicitly instructed.
 - `test-runner` must not claim tests passed without real command output evidence.
 - `rule-feedback-writer` must not persist one-off or task-specific facts.
@@ -52,5 +55,7 @@ For planned work, follow this agent chain:
   [genai_ts_rules](https://github.com/ola-mobility/genai_ts_rules),
   [genai_js_rules](https://github.com/ola-mobility/genai_js_rules)) may install into the same
   `.cursor/rules/` directory in consuming repos — teams merge only what their stack needs.
+- `.cursor/adr/*.md` — durable architectural decisions (patterns, trade-offs, boundaries, stack
+  and cross-cutting workflow choices) for consuming repos; see `architectural-decisions.mdc`.
 - Keep feature-specific API details, endpoint matrices, incident notes, and one-off facts in
   planning, execution, test-report, or investigation docs — not in agent or rule files.

@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- Feature design specs (SDDs) live under `docs/sdd/<slug>.md` instead of `docs/feature/<slug>.md`; see `docs/sdd/README.md`
+
+### Added
+
+- `docs/sdd/README.md` — SDD location and relationship to ADRs
+- Architectural Decision Records under `.cursor/adr/` (README, `0000-template.md`) for consuming repos
+- Workflow rule `architectural-decisions.mdc` — when to write ADRs, filename convention, sections, agent ownership
+- Agent and boundary integration: `architect-planner` authors ADRs; `phase-executor` follows Accepted ADRs; `doc-sync` links only; `rule-feedback-writer` may persist durable arch feedback as ADRs
+
 ## [1.1.0] - 2026-06-03
 
 ### Changed

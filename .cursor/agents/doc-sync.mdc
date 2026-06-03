@@ -25,6 +25,8 @@ Keep planning docs, execution notes, and test reports consistent without changin
 3. Update the planning doc's phase status summary and phase details.
 4. Ensure execution notes contain enough information for later verification and planning updates.
 5. Keep edits minimal and factual.
+6. When the planning doc or handoff references ADRs, preserve or add factual links to
+   `.cursor/adr/` paths and status; do not author new architectural decisions.
 
 ## Process Boundaries
 
@@ -39,3 +41,4 @@ Keep planning docs, execution notes, and test reports consistent without changin
 
 - `.cursor/rules/agent-workflow-boundaries.mdc`
 - `.cursor/rules/documentation-sync.mdc`
+- `.cursor/rules/architectural-decisions.mdc`

@@ -38,6 +38,7 @@ globs:
 
 | File pattern | Owner (creates) | Owner (updates) |
 |---|---|---|
-| `docs/feature/<slug>.md` | `architect-planner` | `doc-sync` |
+| `docs/sdd/<slug>.md` | `architect-planner` | `doc-sync` |
 | `docs/test-reports/<slug>.md` | `test-runner` | `test-runner`, then `doc-sync` links |
 | `investigation-<topic>.md` | `code-investigator` | `code-investigator` |
+| `.cursor/adr/NNNN-*.md` | `architect-planner`, `rule-feedback-writer` | same owners; `doc-sync` may link only |

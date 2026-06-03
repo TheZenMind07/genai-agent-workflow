@@ -6,7 +6,7 @@ temperature: 0.1
 tools:
   write: true
 description: >
-  Executes approved phases from docs/feature/<feature>.md or small fixes without
+  Executes approved phases from docs/sdd/<feature>.md or small fixes without
   creating documentation artifacts. One phase per pass; never parallelises code writes.
   Parallelises read-only analysis only when helpful.
 ---
@@ -19,7 +19,8 @@ documentation artifacts.
 
 ## Workflow
 
-1. Read the approved plan or chat-agreed scope.
+1. Read the approved plan or chat-agreed scope and any **Accepted** ADRs linked from it or
+   under `.cursor/adr/`.
 2. Isolate one phase and confirm expected outputs.
 3. Run optional parallel read-only analysis with fast models for impact, compatibility,
    precedent, and risk.
@@ -37,7 +38,8 @@ Include **Summary**, **Files Changed**, **Why Changed**, **Verification**,
 - Do not invent architecture beyond the plan.
 - Do not implement multiple phases unless the user explicitly asks.
 - Do not parallelise code writes.
-- Do not create or update docs, execution notes, reports, planning docs, or test-report files.
+- Do not create or update docs, execution notes, reports, planning docs, test-report files, or ADRs.
+- If implementation reveals a new cross-cutting architectural decision, report it; do not author ADRs.
 
 ## Rules To Follow
 

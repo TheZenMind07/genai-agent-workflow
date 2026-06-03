@@ -1,15 +1,15 @@
 ---
-description: Structure and content requirements for planning documents
+description: Structure and content requirements for SDDs under docs/sdd/
 globs:
-  - "docs/feature/**/*.md"
+  - "docs/sdd/**/*.md"
 ---
 
 # Planning Documents
 
 ## Location
 
-All feature plans live under **`docs/feature/<feature-slug>.md`**.
-One file per feature; do not split a single feature plan across multiple files.
+All feature design specs (SDDs) live under **`docs/sdd/<feature-slug>.md`**.
+One file per feature; do not split a single SDD across multiple files.
 
 ## Required Sections
 
@@ -18,7 +18,8 @@ Every planning document must include the following sections in order:
 1. **Goal** — one paragraph describing the desired outcome and motivation.
 2. **Scope** — what is included in this plan.
 3. **Non-Goals** — what is explicitly excluded.
-4. **Dependencies** — other features, services, or teams this plan depends on.
+4. **Dependencies** — other features, services, teams, or **Accepted** ADRs under
+   `.cursor/adr/` that constrain this work (link paths; do not duplicate ADR bodies here).
 5. **Assumptions** — facts assumed true without verification.
 6. **Open Questions** — unresolved questions with an owner and due date.
 7. **API Changes** — list of APIs that will change or be newly introduced; include request
@@ -50,5 +51,7 @@ Use exactly these values in the status table:
 
 - Mark the document `DRAFT` at the top until the requester confirms it is complete.
 - Do not store feature-specific facts in agent or rule files; keep them here.
+- Record durable architectural decisions in `.cursor/adr/` per `architectural-decisions.mdc`;
+  link from this plan instead of embedding full trade-off narratives.
 - `doc-sync` is the only agent permitted to update the Phase Implementation Status table
   without explicit user instruction.

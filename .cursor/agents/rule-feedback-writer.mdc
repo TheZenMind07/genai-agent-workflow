@@ -35,6 +35,7 @@ and agent behaviour improvements into the right Cursor guidance files.
 | `AGENTS.md` | Broad defaults applicable to all agents |
 | `.cursor/agents/<name>.mdc` | Role-specific workflow and responsibility guidance |
 | `.cursor/rules/` | Hard enforcement, scoped coding-practice rules, and reusable feedback |
+| `.cursor/adr/` | Durable architectural decisions with context, trade-offs, and consequences |
 
 ## Process Boundaries
 
@@ -42,7 +43,10 @@ and agent behaviour improvements into the right Cursor guidance files.
 - No secrets or PII in rules, agent docs, or skills.
 - Do not create dated feedback files for durable guidance.
 - Do not persist one-off task details, feature-specific facts, or non-reusable feedback.
+- Prefer an ADR over a rule file when the feedback is an architectural choice with alternatives
+  and consequences; use rules for enforceable constraints agents must follow every session.
 
 ## Rules To Follow
 
 - `.cursor/rules/agent-workflow-boundaries.mdc`
+- `.cursor/rules/architectural-decisions.mdc`

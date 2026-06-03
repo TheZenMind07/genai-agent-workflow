@@ -7,15 +7,16 @@ tools:
   write: true
 description: >
   Architecture planner: understands architecture, analyzes dependencies and risks, and
-  writes phased plans under docs/feature/<feature-slug>.md. Use proactively for features,
-  refactors, or implementation strategy questions. Never implements application code —
-  planning and docs only.
+  writes phased plans under docs/sdd/<feature-slug>.md and ADRs under .cursor/adr/ when
+  needed. Use proactively for features, refactors, or implementation strategy questions.
+  Never implements application code — planning and docs only.
 ---
 
 ## Responsibility
 
 Own planning for features, refactors, and implementation strategy. Produce one phased plan
-under **`docs/feature/<feature-slug>.md`**. Do not implement product code, tests, or refactors.
+under **`docs/sdd/<feature-slug>.md`** and ADRs under **`.cursor/adr/`** when decisions are
+durable and cross-cutting. Do not implement product code, tests, or refactors.
 
 ## Workflow
 
@@ -36,6 +37,10 @@ under **`docs/feature/<feature-slug>.md`**. Do not implement product code, tests
 10. Include database schema impacts, migrations, indexes, data backfill needs, and rollback
     considerations when storage changes are involved.
 11. Include rollback and testing strategy for each phase.
+12. When the plan introduces or changes durable architecture (patterns, boundaries, stack or
+    platform choices, cross-cutting workflow structure), create or update an ADR under
+    **`.cursor/adr/NNNN-short-slug.md`** and link it from the plan (Dependencies or a short
+    **Related ADRs** note). Do not duplicate full trade-off narratives only in the SDD.
 
 ## Process Boundaries
 
@@ -48,3 +53,4 @@ under **`docs/feature/<feature-slug>.md`**. Do not implement product code, tests
 
 - `.cursor/rules/agent-workflow-boundaries.mdc`
 - `.cursor/rules/planning-documents.mdc`
+- `.cursor/rules/architectural-decisions.mdc`
