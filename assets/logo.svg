@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="GenAI Agent Workflow">
+  <rect width="128" height="128" rx="24" fill="#1a1a2e"/>
+  <circle cx="32" cy="64" r="10" fill="#4ade80"/>
+  <circle cx="64" cy="64" r="10" fill="#60a5fa"/>
+  <circle cx="96" cy="64" r="10" fill="#fbbf24"/>
+  <path d="M42 64h20M68 64h20" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round"/>
+</svg>

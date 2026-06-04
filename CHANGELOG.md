@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Cursor Marketplace plugin manifest (`.cursor-plugin/plugin.json`), `assets/logo.svg`,
+  `LICENSE`, and [MARKETPLACE.md](./MARKETPLACE.md) publish guide
 - `.cursor/hooks.json` and `subagentStop` scripts to auto-invoke **doc-sync** after
   **phase-executor** and **test-runner** via `followup_message`
 - `workflow-hooks.mdc` — hook installation, matchers, and requirements

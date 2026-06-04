@@ -1,0 +1,35 @@
+{
+  "name": "genai-agent-workflow",
+  "displayName": "GenAI Agent Workflow",
+  "version": "1.2.0",
+  "description": "Framework-agnostic agent workflow for feature delivery: investigate, plan, execute, doc-sync, test, and verify. Includes subagents, lifecycle rules, optional doc-sync hooks, and ADR guidance.",
+  "author": {
+    "name": "Ola Mobility"
+  },
+  "publisher": "ola-mobility",
+  "homepage": "https://github.com/ola-mobility/genai_agent_rules",
+  "repository": "https://github.com/ola-mobility/genai_agent_rules",
+  "license": "MIT",
+  "logo": "assets/logo.svg",
+  "category": "developer-tools",
+  "keywords": [
+    "agents",
+    "workflow",
+    "subagents",
+    "planning",
+    "documentation",
+    "testing",
+    "sdd",
+    "adr"
+  ],
+  "tags": [
+    "workflow",
+    "phase-executor",
+    "doc-sync",
+    "architect-planner",
+    "test-runner"
+  ],
+  "rules": ".cursor/rules/",
+  "agents": ".cursor/agents/",
+  "hooks": ".cursor/hooks.json"
+}

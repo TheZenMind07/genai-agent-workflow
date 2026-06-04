@@ -14,6 +14,12 @@ Thank you for helping evolve org-wide agent workflow standards. Changes here sho
 3. Update [CHANGELOG.md](./CHANGELOG.md) under `[Unreleased]` with a short, user-facing summary.
 4. Request review from a maintainer in [OWNERS.md](./OWNERS.md).
 
+## Cursor Marketplace
+
+Plugin metadata lives in `.cursor-plugin/plugin.json`. When behaviour or components change,
+bump `version` in that file to match the release you are cutting. See [MARKETPLACE.md](./MARKETPLACE.md)
+for the submission checklist and publish URL.
+
 ## File guidelines
 
 - Keep **agents** framework-agnostic; do not hard-code language, framework, or test-runner paths. Mention optional sibling standards repos only as examples teams may merge into `.cursor/rules/`.
