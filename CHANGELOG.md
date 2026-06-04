@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- `.cursor/hooks.json` and `subagentStop` scripts to auto-invoke **doc-sync** after
+  **phase-executor** and **test-runner** via `followup_message`
+- `workflow-hooks.mdc` — hook installation, matchers, and requirements
+
 ### Changed
 
 - Merged **`requirement-refinement`** into **`architect-planner`** — one SDD under `docs/sdd/` now holds requirements and phased plan; removed `.cursor/agents/requirement-refinement.mdc`

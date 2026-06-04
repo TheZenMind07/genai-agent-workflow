@@ -23,6 +23,8 @@ For planned work, follow this agent chain:
 
 - After `phase-executor` completes, hand off to `doc-sync` **before** verification so the
   planning doc captures implementation status, changed files, risks, pending work, and next phase.
+- Optional: `.cursor/hooks.json` `subagentStop` hooks auto-submit a follow-up to invoke `doc-sync`
+  after `phase-executor` and again after `test-runner` (see `workflow-hooks.mdc`).
 - After that doc sync, hand off to `test-runner` to review the diff, add/update tests, run
   verification, and write a test execution report under `docs/sdd/test-reports/`.
 - After `test-runner` writes the report, hand off to `doc-sync` again to sync verification

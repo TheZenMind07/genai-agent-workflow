@@ -1,0 +1,34 @@
+---
+description: Optional Cursor hooks that enforce doc-sync handoffs after execute and verify
+alwaysApply: false
+---
+
+# Workflow Hooks
+
+Consuming repos may install `.cursor/hooks.json` and `.cursor/hooks/*` from this repository to
+automate handoffs that are otherwise described only in rules.
+
+## subagentStop → doc-sync
+
+When a subagent completes successfully, `subagentStop` hooks can return a `followup_message`
+so the parent agent continues the chain without a manual reminder.
+
+| After subagent | Hook script | Next step |
+|----------------|-------------|-----------|
+| `phase-executor` | `invoke-doc-sync-after-phase-executor.sh` | Invoke `doc-sync` (implementation sync) |
+| `test-runner` | `invoke-doc-sync-after-test-runner.sh` | Invoke `doc-sync` (verification sync) |
+
+Matchers use the subagent `name` from `.cursor/agents/<name>.mdc` (e.g. `phase-executor`).
+If hooks do not fire, confirm the **Hooks** output channel and that `subagent_type` in the
+event matches the matcher.
+
+## Requirements
+
+- `python3` on `PATH` (hook scripts parse stdin JSON)
+- Copy `hooks.json` and make `*.sh` executable: `chmod +x .cursor/hooks/*.sh`
+- Hooks complement — do not replace — `agent-workflow-boundaries.mdc` and agent prompts
+
+## Disabling
+
+Remove or comment out entries in `.cursor/hooks.json`, or omit the hooks directory when
+installing this repo. Teams that prefer manual handoffs can rely on rules alone.
