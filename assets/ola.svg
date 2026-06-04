@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Ola GenAI Agent Workflow">
+  <defs>
+    <linearGradient id="visionGlow" x1="64" y1="18" x2="64" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3DBE29" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#3DBE29" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="agentLink" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3DBE29"/>
+      <stop offset="1" stop-color="#60a5fa"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Canvas -->
+  <rect width="128" height="128" rx="22" fill="#000000"/>
+
+  <!-- Vision: eye + insight arc -->
+  <ellipse cx="64" cy="34" rx="26" ry="14" fill="url(#visionGlow)"/>
+  <path
+    d="M38 34c0-10 11.6-18 26-18s26 8 26 18"
+    fill="none"
+    stroke="#e2e8f0"
+    stroke-width="2.2"
+    stroke-linecap="round"/>
+  <circle cx="64" cy="34" r="9" fill="#0a0a0a" stroke="#ffffff" stroke-width="2"/>
+  <circle cx="64" cy="34" r="5" fill="#3DBE29"/>
+  <circle cx="67" cy="31" r="1.8" fill="#ffffff" opacity="0.9"/>
+  <path
+    d="M88 22a18 18 0 0 1 0 24"
+    fill="none"
+    stroke="#3DBE29"
+    stroke-width="1.8"
+    stroke-linecap="round"
+    opacity="0.85"/>
+
+  <!-- Agent chain: investigate → plan → execute → sync -->
+  <path
+    d="M24 58h80"
+    stroke="url(#agentLink)"
+    stroke-width="2.5"
+    stroke-linecap="round"/>
+  <circle cx="24" cy="58" r="7" fill="#60a5fa"/>
+  <circle cx="48" cy="58" r="7" fill="#fbbf24"/>
+  <circle cx="72" cy="58" r="7" fill="#3DBE29"/>
+  <circle cx="96" cy="58" r="7" fill="#4ade80"/>
+  <!-- Agent cores -->
+  <circle cx="24" cy="58" r="3" fill="#000000" opacity="0.35"/>
+  <circle cx="48" cy="58" r="3" fill="#000000" opacity="0.35"/>
+  <circle cx="72" cy="58" r="3" fill="#000000" opacity="0.35"/>
+  <circle cx="96" cy="58" r="3" fill="#000000" opacity="0.35"/>
+  <!-- Bot/agent hint on active node -->
+  <path
+    d="M69 54h6v2h-2v4h-2v-4h-2z"
+    fill="#000000"
+    opacity="0.5"/>
+
+  <!-- Workflow handoff chevrons -->
+  <path
+    d="M33 58l3-3v6zm27 0l3-3v6zm27 0l3-3v6z"
+    fill="#ffffff"
+    opacity="0.35"/>
+
+  <!-- Ola wordmark -->
+  <text
+    x="64"
+    y="108"
+    text-anchor="middle"
+    font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-size="36"
+    font-weight="700"
+    letter-spacing="-0.5"
+    fill="#ffffff">Ola</text>
+  <text
+    x="64"
+    y="120"
+    text-anchor="middle"
+    font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-size="8"
+    font-weight="600"
+    letter-spacing="2.2"
+    fill="#3DBE29"
+    opacity="0.95">AGENT WORKFLOW</text>
+</svg>

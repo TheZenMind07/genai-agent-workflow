@@ -4,6 +4,8 @@
 
 Organization-wide **Cursor agent workflow** rules and subagent definitions for AI-assisted feature delivery.
 
+Also published as a **Cursor Marketplace plugin** (`genai-agent-workflow`) — see [MARKETPLACE.md](./MARKETPLACE.md).
+
 ## Overview
 
 This repository provides:
@@ -64,6 +66,10 @@ genai_agent_rules/
 │       └── test-reports/
 │           └── README.md
 │
+├── .cursor-plugin/
+│   └── plugin.json
+├── assets/
+│   └── ola.svg
 └── .cursor/
     ├── hooks.json
     ├── hooks/
@@ -90,6 +96,14 @@ genai_agent_rules/
 ```
 
 ## Installation
+
+### Cursor Marketplace (recommended)
+
+1. Open **Cursor → Settings → Plugins** (or the marketplace panel).
+2. Install **GenAI Agent Workflow** (`genai-agent-workflow`), or submit this repo via [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish) if you are a maintainer.
+3. Copy `.cursor/adr/` into your project when you use ADRs (see [MARKETPLACE.md](./MARKETPLACE.md)).
+
+### Manual copy
 
 Copy or symlink into your project (merge with any existing `.cursor/` content):
 
