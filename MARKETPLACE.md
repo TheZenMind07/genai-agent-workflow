@@ -10,7 +10,7 @@ This repository is packaged as a **Cursor plugin** for the [Cursor Marketplace](
 | `.cursor/rules/` | Workflow rules (installed by the plugin) |
 | `.cursor/agents/` | Subagent definitions |
 | `.cursor/hooks.json` | Optional `subagentStop` doc-sync handoffs |
-| `assets/logo.svg` | Marketplace listing logo |
+| `assets/ola.svg` | Marketplace listing logo (Ola) |
 
 Component paths in `plugin.json` point at the existing `.cursor/` tree so manual copy-install and marketplace install stay aligned.
 
@@ -44,7 +44,7 @@ cp -r /path/to/genai_agent_rules/.cursor/adr /path/to/your-project/.cursor/
 
 - [ ] Valid `.cursor-plugin/plugin.json` with unique `name` (`genai-agent-workflow`)
 - [ ] `description`, `version`, `author`, `repository`, `license` set
-- [ ] Logo committed at `assets/logo.svg` and referenced in manifest
+- [ ] Logo committed at `assets/ola.svg` and referenced in manifest
 - [ ] All rules and agents have valid frontmatter
 - [ ] Hook script paths in `.cursor/hooks.json` are relative (no `..`)
 - [ ] `README.md` documents usage and optional ADR copy step

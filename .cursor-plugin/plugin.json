@@ -10,7 +10,7 @@
   "homepage": "https://github.com/ola-mobility/genai_agent_rules",
   "repository": "https://github.com/ola-mobility/genai_agent_rules",
   "license": "MIT",
-  "logo": "assets/logo.svg",
+  "logo": "assets/ola.svg",
   "category": "developer-tools",
   "keywords": [
     "agents",

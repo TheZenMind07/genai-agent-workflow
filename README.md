@@ -69,7 +69,7 @@ genai_agent_rules/
 ├── .cursor-plugin/
 │   └── plugin.json
 ├── assets/
-│   └── logo.svg
+│   └── ola.svg
 └── .cursor/
     ├── hooks.json
     ├── hooks/
