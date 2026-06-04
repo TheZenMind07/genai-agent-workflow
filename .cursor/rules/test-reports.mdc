@@ -1,0 +1,46 @@
+---
+description: Structure and content requirements for test reports under docs/sdd/test-reports/
+globs:
+  - "docs/sdd/test-reports/**/*.md"
+---
+
+# Test Reports
+
+## Location
+
+All test execution reports live under **`docs/sdd/test-reports/<feature-slug>.md`**.
+One file per feature or verification scope; do not split a single verification pass across
+multiple files.
+
+Use the same kebab-case slug as the matching SDD at `docs/sdd/<feature-slug>.md` when verifying
+phased feature work. Create `docs/sdd/test-reports/` if it does not exist.
+
+## Required Sections
+
+Every test report must include the following sections in order:
+
+1. **Scope** — feature slug, phase number (if applicable), diff summary, and linked SDD path.
+2. **Review Summary** — diff review findings, regressions spotted, and risk areas.
+3. **Edge Cases** — scenarios considered beyond the happy path.
+4. **Added / Updated Tests** — list of test files created or modified.
+5. **Executed Test Cases** — markdown table with columns: Test file, Scenario, Result, Notes.
+6. **Scenario Coverage** — markdown table covering success, failure, edge, regression, API contract,
+   storage, transport, and async paths as relevant.
+7. **Command Evidence** — markdown table with columns: Command, Exit code, Result, Output summary.
+   Every `Pass` claim must have a corresponding row with real command output.
+8. **Coverage Evidence** — markdown table with columns: File or code path, Line coverage, Branch
+   coverage, Uncovered lines / branches, Notes. State why coverage is unavailable when not run.
+9. **Failures and Root Cause** — omit section when all tests passed; include diagnosis when not.
+10. **Recommendations** — follow-up tests, fixes, or manual checks.
+11. **Residual Risk** — what remains unverified or environment-dependent.
+
+## Evidence
+
+- Never mark tests as passed without command output in section 7.
+- Do not report pass/fail until all relevant commands have completed.
+- Link the report from the SDD phase status when `doc-sync` updates verification status.
+
+## Ownership
+
+`test-runner` creates and updates test reports. `doc-sync` may link reports from SDDs but must
+not rewrite verification findings unless explicitly instructed.

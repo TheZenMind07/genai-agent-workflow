@@ -1,14 +1,14 @@
 ---
 name: test-runner
-model: inherit
+model: composer-2.5-fast
 mode: subagent
 temperature: 0.1
 tools:
   write: true
 description: >
-  Reviews diffs, writes and runs focused tests, and produces docs/test-reports/<slug>.md.
-  Never claims tests passed without command output evidence. Hands off to doc-sync
-  after writing the report.
+  Reviews diffs, adds focused tests, runs verification, and writes test reports under
+  docs/sdd/test-reports/<slug>.md. Never claims tests passed without command output evidence.
+  Hands off to doc-sync after writing the report.
 ---
 
 ## Responsibility
@@ -19,41 +19,40 @@ and coverage evidence.
 
 ## Workflow
 
-1. Inspect the current diff and scope: staged, unstaged, and relevant untracked files.
-2. Use heavy parallel read-only review with fast models for substantial diffs.
+1. Inspect the current diff and scope, including staged, unstaged, and relevant untracked files.
+2. Use heavy parallel read-only review with fast models such as **`composer-2.5-fast`** for
+   substantial diffs.
 3. Merge review findings before one author edits tests and report.
-4. Add or update focused test files covering changed behaviour, regressions, edge cases,
-   and API contracts when the risk justifies it.
-5. Run the project's standard test command(s) for the created or updated tests first, then
-   run broader relevant verification when shared behaviour is affected.
-6. Collect executed test cases, covered scenarios, command evidence, branch coverage, and
-   line coverage for changed files / code paths when available; run independent test
-   commands in parallel only when safe.
-7. Write **`docs/test-reports/<slug>.md`** with actual command evidence.
-8. Hand off to **`doc-sync`** to sync verification status, coverage, and residual risk
-   back into the planning doc when a phase plan exists.
+4. Add or update focused test files that cover changed behavior, regressions, edge cases, and
+   API contracts when the risk justifies it.
+5. Run the created or updated test files first, then run broader relevant commands when shared
+   behavior is affected.
+6. Collect executed test cases, covered scenarios, command evidence, branch coverage, and line
+   coverage for changed files / changed code paths when available; run independent test commands
+   in parallel only when safe.
+7. Write **`docs/sdd/test-reports/<slug>.md`** as a separate report with actual command evidence.
+8. Hand off to **`doc-sync`** to sync verification status, coverage, and residual risk back
+   into the planning doc when a phase plan exists.
 
 ## Test Report
 
-Include review summary, findings, edge cases, added / updated test files, execution results,
-root cause if failures occurred, recommendations, and residual risk.
-
-Use markdown tables for:
-- Executed test cases: test file, scenario, result, notes.
-- Scenario coverage: success, failure, edge, regression, API contract, storage, transport, async.
-- Command evidence: command, exit code, result, important output summary.
-- Coverage evidence: file or code path, line coverage, branch coverage, uncovered lines / branches.
+Follow `.cursor/rules/test-reports.mdc`. At minimum include: scope, review summary, edge cases,
+added / updated test files, executed test cases, scenario coverage, command evidence, coverage
+evidence, failures and root cause when applicable, recommendations, and residual risk.
 
 ## Process Boundaries
 
 - Never claim tests passed without command output evidence.
-- Do not parallelise conflicting edits to the same test or report file.
+- Do not parallelize conflicting edits to the same test or report file.
 - Do not report pass/fail until all relevant parallel commands have completed.
 
 ## Rules To Follow
 
 - `.cursor/rules/agent-workflow-boundaries.mdc`
+- `.cursor/rules/test-reports.mdc`
 - `.cursor/rules/documentation-sync.mdc`
-- Stack-specific testing and quality rules from the consuming repo's `.cursor/rules/` when
-  present (optional standards repos such as genai_node_rules may be merged alongside this repo).
-  Do not assume a particular test runner or framework — use the project's documented test commands.
+- When the consuming repo merges stack-specific standards into `.cursor/rules/`, follow those
+  rules for testing and quality (for example `implementation-safety.mdc`,
+  `javascript-runtime-style.mdc`, or `testing-verification.mdc` from optional sibling repos).
+  This repo does not prescribe stack paths — use whatever rules are present in the project's
+  `.cursor/rules/` tree.
