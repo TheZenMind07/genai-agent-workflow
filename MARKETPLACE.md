@@ -1,40 +1,38 @@
 # Cursor Marketplace
 
-This repository is packaged as a **Cursor plugin** for the [Cursor Marketplace](https://cursor.com/marketplace).
+This repository is an **extendable plugin marketplace** for Ola Mobility Cursor standards.
 
-## Plugin manifest
+## Marketplace manifest
 
 | File | Purpose |
 |------|---------|
-| `.cursor-plugin/plugin.json` | Plugin metadata and component paths |
-| `.cursor/rules/` | Workflow rules (installed by the plugin) |
-| `.cursor/agents/` | Subagent definitions |
-| `.cursor/hooks.json` | Optional `subagentStop` doc-sync handoffs |
-| `assets/ola.svg` | Marketplace listing logo (Ola) |
+| [`.cursor-plugin/marketplace.json`](./.cursor-plugin/marketplace.json) | Indexes all plugins in this repo |
+| [`plugins/<name>/`](./plugins/) | One directory per plugin |
+| [`plugins/<name>/.cursor-plugin/plugin.json`](./plugins/genai-agent-workflow/.cursor-plugin/plugin.json) | Per-plugin metadata and component paths |
+| [`assets/ola.svg`](./assets/ola.svg) | Shared marketplace logo (referenced by plugins) |
 
-Component paths in `plugin.json` point at the existing `.cursor/` tree so manual copy-install and marketplace install stay aligned.
+### Plugins today and planned
+
+| Plugin | Status |
+|--------|--------|
+| `genai-agent-workflow` | **Available** — agents, rules, hooks |
+| `genai-js-rules` | **Planned** — JavaScript rules only |
+| `genai-ts-rules` | **Planned** — TypeScript rules only |
+
+Add JS/TS by creating `plugins/genai-js-rules/` (or `-ts-`) with a manifest and registering in `marketplace.json`. See [plugins/README.md](./plugins/README.md).
 
 ## Install from the marketplace
 
-1. Open **Cursor Settings → Plugins** (or search the marketplace panel).
-2. Find **GenAI Agent Workflow** (`genai-agent-workflow`) or install from this repo after it is published.
-3. Enable the plugin for your workspace.
-
-After install, create project doc folders as needed (`docs/sdd/`, `docs/investigation/`, etc.) — see [README.md](./README.md).
-
-### ADR scaffold (manual)
-
-The plugin ships rules and agents only. Copy the ADR template into consuming projects when you use architectural decisions:
-
-```bash
-cp -r /path/to/genai_agent_rules/.cursor/adr /path/to/your-project/.cursor/
-```
+1. Open **Cursor Settings → Plugins**.
+2. Find plugins from this repo (marketplace id: **ola-genai-plugins**).
+3. Install **genai-agent-workflow**; add JS/TS plugins when listed.
+4. Copy [`scaffold/adr/`](./scaffold/adr/) to `your-project/.cursor/adr/` when using ADRs.
 
 ## Publish / update listing
 
-1. Ensure [plugin.json](./.cursor-plugin/plugin.json) `version` matches [CHANGELOG.md](./CHANGELOG.md).
-2. Validate locally: rules and agents have frontmatter; hook scripts are executable.
-3. Submit or update at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish) with the public Git URL:
+1. Bump each plugin’s `version` in `plugins/<name>/.cursor-plugin/plugin.json` and [CHANGELOG.md](./CHANGELOG.md).
+2. Update `.cursor-plugin/marketplace.json` when adding plugins.
+3. Submit at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish):
 
    `https://github.com/ola-mobility/genai_agent_rules`
 
@@ -42,16 +40,30 @@ cp -r /path/to/genai_agent_rules/.cursor/adr /path/to/your-project/.cursor/
 
 ### Submission checklist
 
-- [ ] Valid `.cursor-plugin/plugin.json` with unique `name` (`genai-agent-workflow`)
-- [ ] `description`, `version`, `author`, `repository`, `license` set
-- [ ] Logo committed at `assets/ola.svg` and referenced in manifest
-- [ ] All rules and agents have valid frontmatter
-- [ ] Hook script paths in `.cursor/hooks.json` are relative (no `..`)
-- [ ] `README.md` documents usage and optional ADR copy step
-- [ ] Plugin tested in a sample project before submit
+- [ ] Root `.cursor-plugin/marketplace.json` with unique marketplace `name`
+- [ ] Each plugin has `plugins/<name>/.cursor-plugin/plugin.json` and valid component paths
+- [ ] `genai-agent-workflow`: rules, agents, hooks; hook scripts executable; paths relative (no `..`)
+- [ ] Logo at `assets/ola.svg` referenced from plugin manifest
+- [ ] [README.md](./README.md) and [plugins/README.md](./plugins/README.md) document install and planned JS/TS plugins
+- [ ] Tested locally via `~/.cursor/plugins/local/<plugin-name>` symlink
+
+## Local testing
+
+```bash
+ln -sf "$(pwd)/plugins/genai-agent-workflow" ~/.cursor/plugins/local/genai-agent-workflow
+chmod +x plugins/genai-agent-workflow/hooks/*.sh
+```
+
+Reload Cursor, enable the plugin on a sample app repo, run a subagent and check the **Hooks** output channel.
+
+Hook smoke test:
+
+```bash
+echo '{"status":"completed"}' | plugins/genai-agent-workflow/hooks/invoke-doc-sync-after-phase-executor.sh
+```
 
 ## Maintainer notes
 
-- **Single-plugin repo** — no root `marketplace.json` (that format is for multi-plugin monorepos).
-- Bump `plugin.json` `version` when cutting a release tag.
-- Do not add stack-specific rules here; pair with [genai_node_rules](https://github.com/ola-mobility/genai_node_rules) and siblings in consuming repos.
+- **Extendable monorepo** — new plugins = new folder under `plugins/` + `marketplace.json` entry.
+- Keep **genai-agent-workflow** framework-agnostic; put JS/TS (and later Node) rules in separate plugins.
+- ADR template stays under `scaffold/adr/` (not installed by plugins automatically).

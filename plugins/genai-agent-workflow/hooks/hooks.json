@@ -3,12 +3,12 @@
   "hooks": {
     "subagentStop": [
       {
-        "command": ".cursor/hooks/invoke-doc-sync-after-phase-executor.sh",
+        "command": "./hooks/invoke-doc-sync-after-phase-executor.sh",
         "matcher": "phase-executor",
         "loop_limit": 3
       },
       {
-        "command": ".cursor/hooks/invoke-doc-sync-after-test-runner.sh",
+        "command": "./hooks/invoke-doc-sync-after-test-runner.sh",
         "matcher": "test-runner",
         "loop_limit": 3
       }
