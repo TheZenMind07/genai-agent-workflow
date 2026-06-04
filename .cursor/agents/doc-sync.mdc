@@ -1,6 +1,6 @@
 ---
 name: doc-sync
-model: inherit
+model: composer-2.5-fast
 mode: subagent
 temperature: 0.1
 tools:
@@ -8,7 +8,7 @@ tools:
 is_background: true
 description: >
   Synchronises phase implementation status and evidence across planning, execution,
-  and verification docs. Runs in the background after phase-executor or test-reviewer
+  and verification docs. Runs in the background after phase-executor or test-runner
   completes. Never touches product code.
 ---
 

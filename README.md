@@ -9,7 +9,7 @@ Organization-wide **Cursor agent workflow** rules and subagent definitions for A
 This repository provides:
 
 - **Workflow rules** (`.cursor/rules/`) — agent lifecycle, SDD structure under `docs/sdd/`, ADRs, and documentation sync
-- **Subagent definitions** (`.cursor/agents/`) — requirement refinement, planning, execution, testing, and doc sync roles
+- **Subagent definitions** (`.cursor/agents/`) — planning (including requirements), execution, testing, and doc sync roles
 - **ADR scaffold** (`.cursor/adr/`) — template and README for architectural decision records in consuming repos
 
 Agent guidance is **framework-agnostic** (tech-stack neutral). It does not assume Node.js, Express, TypeScript, or any specific language, runtime, or test runner. Pair this repo with language/runtime standards repos when your stack needs them.
@@ -23,7 +23,7 @@ Agent guidance is **framework-agnostic** (tech-stack neutral). It does not assum
 | TypeScript conventions | [genai_ts_rules](https://github.com/ola-mobility/genai_ts_rules) *(optional)* |
 | JavaScript baseline | [genai_js_rules](https://github.com/ola-mobility/genai_js_rules) *(optional)* |
 
-Use **genai_agent_rules** when your team runs the requirement → investigate → plan → execute → verify agent chain with `docs/sdd/` design specs and `docs/test-reports/`.
+Use **genai_agent_rules** when your team runs the investigate → plan → execute → verify agent chain with `docs/investigation/`, SDDs under `docs/sdd/`, and test reports under `docs/sdd/test-reports/`.
 
 Use optional sibling standards repos for how code is written in a given stack — coding style, architecture patterns, linting, security, and testing conventions. Merge only the repos your project needs into the same `.cursor/rules/` tree; agents follow whatever stack rules are present there.
 
@@ -54,8 +54,12 @@ genai_agent_rules/
 ├── OWNERS.md
 │
 ├── docs/
+│   ├── investigation/
+│   │   └── README.md
 │   └── sdd/
-│       └── README.md
+│       ├── README.md
+│       └── test-reports/
+│           └── README.md
 │
 └── .cursor/
     ├── adr/
@@ -65,9 +69,10 @@ genai_agent_rules/
     │   ├── agent-workflow-boundaries.mdc
     │   ├── architectural-decisions.mdc
     │   ├── planning-documents.mdc
+    │   ├── investigation-reports.mdc
+    │   ├── test-reports.mdc
     │   └── documentation-sync.mdc
     └── agents/
-        ├── requirement-refinement.mdc
         ├── code-investigator.mdc
         ├── architect-planner.mdc
         ├── phase-executor.mdc
@@ -98,19 +103,20 @@ In Cursor, subagents are available when `.cursor/agents/*.mdc` is present; workf
 | `agent-workflow-boundaries.mdc` | Subagent lifecycle, handoffs, parallelisation |
 | `architectural-decisions.mdc` | ADRs under `.cursor/adr/` and agent ownership |
 | `planning-documents.mdc` | Feature design specs (SDDs) under `docs/sdd/` |
+| `investigation-reports.mdc` | Investigation reports under `docs/investigation/` |
+| `test-reports.mdc` | Test execution reports under `docs/sdd/test-reports/` |
 | `documentation-sync.mdc` | Sync plan docs after implementation and verification |
 
 ## Subagents
 
 | Agent | Role |
 |-------|------|
-| `requirement-refinement` | Clarify requirements before planning |
-| `code-investigator` | Trace flows; write investigation reports |
-| `architect-planner` | Phased plans; no product code |
+| `code-investigator` | Trace flows; write reports under `docs/investigation/` |
+| `architect-planner` | Clarify requirements and write phased SDDs; no product code |
 | `phase-executor` | Implement one approved phase per pass |
 | `doc-sync` | Update planning docs after execute/verify |
-| `test-runner` | Tests, command evidence, test reports |
-| `rule-feedback-writer` | Persist durable guidance from user feedback |
+| `test-runner` | Tests, command evidence, test reports under `docs/sdd/test-reports/` |
+| `rule-feedback-writer` | Persist guidance to rules, agents, skills, ADRs, or `AGENTS.md` |
 
 ## Versioning
 

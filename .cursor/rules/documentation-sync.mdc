@@ -30,7 +30,7 @@ globs:
 
 ## Evidence Requirements
 
-- Every status change to `Verified` must reference a test report path.
+- Every status change to `Verified` must reference a test report path under `docs/sdd/test-reports/`.
 - Every status change to `Implemented` must list the changed files.
 - Do not change status to `Verified` based on assertions alone; require command output.
 
@@ -39,6 +39,6 @@ globs:
 | File pattern | Owner (creates) | Owner (updates) |
 |---|---|---|
 | `docs/sdd/<slug>.md` | `architect-planner` | `doc-sync` |
-| `docs/test-reports/<slug>.md` | `test-runner` | `test-runner`, then `doc-sync` links |
-| `investigation-<topic>.md` | `code-investigator` | `code-investigator` |
+| `docs/sdd/test-reports/<slug>.md` | `test-runner` | `test-runner`, then `doc-sync` links |
+| `docs/investigation/<slug>.md` | `code-investigator` | `code-investigator` |
 | `.cursor/adr/NNNN-*.md` | `architect-planner`, `rule-feedback-writer` | same owners; `doc-sync` may link only |

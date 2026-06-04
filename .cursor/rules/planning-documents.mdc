@@ -8,27 +8,33 @@ globs:
 
 ## Location
 
-All feature design specs (SDDs) live under **`docs/sdd/<feature-slug>.md`**.
-One file per feature; do not split a single SDD across multiple files.
+All feature requirements and design specs (SDDs) live under **`docs/sdd/<feature-slug>.md`**.
+One file per feature; do not split a single SDD across multiple files or maintain a parallel
+`docs/requirements/` file.
 
 ## Required Sections
 
 Every planning document must include the following sections in order:
 
 1. **Goal** — one paragraph describing the desired outcome and motivation.
-2. **Scope** — what is included in this plan.
-3. **Non-Goals** — what is explicitly excluded.
-4. **Dependencies** — other features, services, teams, or **Accepted** ADRs under
+2. **Actors and Entry Points** — who interacts with the feature and how work enters the system.
+3. **Scope** — what is included in this plan.
+4. **Non-Goals** — what is explicitly excluded.
+5. **Functional Requirements** — numbered, testable capabilities.
+6. **Acceptance Criteria** — unambiguous pass/fail conditions for delivery.
+7. **Non-Functional Requirements** — performance, security, observability, and similar constraints
+   (omit section if none apply).
+8. **Dependencies** — other features, services, teams, or **Accepted** ADRs under
    `.cursor/adr/` that constrain this work (link paths; do not duplicate ADR bodies here).
-5. **Assumptions** — facts assumed true without verification.
-6. **Open Questions** — unresolved questions with an owner and due date.
-7. **API Changes** — list of APIs that will change or be newly introduced; include request
-   shape, response shape, status codes, validation, auth, and compatibility notes.
-8. **Data / Storage Changes** — schema impacts, migrations, indexes, backfill needs,
-   and rollback considerations (omit section if no storage changes).
-9. **Sequence Diagrams** — Mermaid sequence diagrams for non-trivial user or service flows.
-10. **Phase Implementation Status** — table with columns: Phase, Title, Status, Notes.
-11. **Phases** — one `##` sub-section per phase; each must include:
+9. **Assumptions** — facts assumed true without verification.
+10. **Open Questions** — unresolved questions with an owner and due date.
+11. **API Changes** — list of APIs that will change or be newly introduced; include request
+    shape, response shape, status codes, validation, auth, and compatibility notes.
+12. **Data / Storage Changes** — schema impacts, migrations, indexes, backfill needs,
+    and rollback considerations (omit section if no storage changes).
+13. **Sequence Diagrams** — Mermaid sequence diagrams for non-trivial user or service flows.
+14. **Phase Implementation Status** — table with columns: Phase, Title, Status, Notes.
+15. **Phases** — one `##` sub-section per phase; each must include:
     - Objective
     - Implementation steps (numbered)
     - Expected outputs
@@ -44,7 +50,7 @@ Use exactly these values in the status table:
 | `Not Started` | No implementation begun |
 | `In Progress` | Partially implemented |
 | `Implemented` | Code written, not yet verified |
-| `Verified` | Tests passed with command evidence |
+| `Verified` | Tests passed with command evidence in `docs/sdd/test-reports/<slug>.md` |
 | `Blocked` | Cannot proceed; reason in Notes |
 
 ## Rules
@@ -54,4 +60,4 @@ Use exactly these values in the status table:
 - Record durable architectural decisions in `.cursor/adr/` per `architectural-decisions.mdc`;
   link from this plan instead of embedding full trade-off narratives.
 - `doc-sync` is the only agent permitted to update the Phase Implementation Status table
-  without explicit user instruction.
+  without explicit user instruction; link test reports from phase Notes when status is `Verified`.

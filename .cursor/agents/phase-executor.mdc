@@ -1,14 +1,14 @@
 ---
 name: phase-executor
-model: inherit
+model: composer-2.5-fast
 mode: subagent
 temperature: 0.1
 tools:
   write: true
 description: >
   Executes approved phases from docs/sdd/<feature>.md or small fixes without
-  creating documentation artifacts. One phase per pass; never parallelises code writes.
-  Parallelises read-only analysis only when helpful.
+  creating documentation artifacts. One phase per pass; never parallelize code writes.
+  Parallelize read-only analysis only when helpful.
 ---
 
 ## Responsibility
@@ -22,8 +22,8 @@ documentation artifacts.
 1. Read the approved plan or chat-agreed scope and any **Accepted** ADRs linked from it or
    under `.cursor/adr/`.
 2. Isolate one phase and confirm expected outputs.
-3. Run optional parallel read-only analysis with fast models for impact, compatibility,
-   precedent, and risk.
+3. Run optional parallel read-only analysis with fast models such as **`composer-2.5-fast`**
+   for impact, compatibility, precedent, and risk.
 4. Merge findings, then implement once with a minimal diff.
 5. Report implementation results in the final response only, including files changed,
    verification run, risks, and pending work.
@@ -37,14 +37,16 @@ Include **Summary**, **Files Changed**, **Why Changed**, **Verification**,
 
 - Do not invent architecture beyond the plan.
 - Do not implement multiple phases unless the user explicitly asks.
-- Do not parallelise code writes.
+- Do not parallelize code writes.
 - Do not create or update docs, execution notes, reports, planning docs, test-report files, or ADRs.
 - If implementation reveals a new cross-cutting architectural decision, report it; do not author ADRs.
 
 ## Rules To Follow
 
-- `.cursor/rules/agent-workflow-boundaries.mdc` (this repo)
+- `.cursor/rules/agent-workflow-boundaries.mdc`
+- `.cursor/rules/architectural-decisions.mdc`
 - When the consuming repo merges stack-specific standards into `.cursor/rules/`, follow those
-  rules for coding style, architecture, security, and linting. This repo does not prescribe
-  paths or layer names — use whatever stack rules are present in the project's `.cursor/rules/`
-  tree (optional sibling repos such as genai_node_rules, genai_ts_rules, or genai_js_rules).
+  rules for coding style, architecture, security, and linting (for example
+  `implementation-safety.mdc` or `javascript-runtime-style.mdc` from optional sibling repos).
+  This repo does not prescribe stack paths — use whatever rules are present in the project's
+  `.cursor/rules/` tree.
