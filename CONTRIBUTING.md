@@ -4,21 +4,24 @@ Thank you for helping evolve org-wide agent workflow standards. Changes here sho
 
 ## What belongs here
 
-- **In scope** — Subagent roles, handoffs, SDD structure under `docs/sdd/`, ADR conventions under `.cursor/adr/`, documentation sync, and workflow boundaries that are not tied to a single language or framework.
+- **In scope** — Subagent roles, handoffs, SDD structure under `docs/sdd/`, ADR conventions (`scaffold/adr/` for consuming repos), documentation sync, and workflow boundaries that are not tied to a single language or framework.
 - **Out of scope** — Language/runtime coding standards, lint rules, framework-specific architecture, or project-specific app configuration. Those belong in optional sibling standards repos (e.g. [genai_node_rules](https://github.com/ola-mobility/genai_node_rules), [genai_ts_rules](https://github.com/ola-mobility/genai_ts_rules), [genai_js_rules](https://github.com/ola-mobility/genai_js_rules)) or the consuming repo.
 
 ## How to propose a change
 
 1. Open an issue or discussion describing the workflow problem and proposed agent or rule text.
-2. Open a pull request updating the relevant `.cursor/agents/*.mdc` or `.cursor/rules/*.mdc` file(s).
+2. Open a pull request updating the relevant files under `plugins/<plugin-name>/` (e.g. `plugins/genai-agent-workflow/agents/` or `rules/`).
 3. Update [CHANGELOG.md](./CHANGELOG.md) under `[Unreleased]` with a short, user-facing summary.
 4. Request review from a maintainer in [OWNERS.md](./OWNERS.md).
 
 ## Cursor Marketplace
 
-Plugin metadata lives in `.cursor-plugin/plugin.json`. When behaviour or components change,
-bump `version` in that file to match the release you are cutting. See [MARKETPLACE.md](./MARKETPLACE.md)
-for the submission checklist and publish URL.
+- Marketplace index: `.cursor-plugin/marketplace.json`
+- Per-plugin manifest: `plugins/<name>/.cursor-plugin/plugin.json`
+- Adding a plugin: see [plugins/README.md](./plugins/README.md)
+
+When behaviour or components change, bump the plugin `version` and [CHANGELOG.md](./CHANGELOG.md).
+See [MARKETPLACE.md](./MARKETPLACE.md) for publish and local test steps.
 
 ## File guidelines
 

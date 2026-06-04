@@ -8,12 +8,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
-- `assets/ola.svg` — Ola marketplace logo (plugin manifest `logo` field)
-- Cursor Marketplace plugin manifest (`.cursor-plugin/plugin.json`),
-  `LICENSE`, and [MARKETPLACE.md](./MARKETPLACE.md) publish guide
-- `.cursor/hooks.json` and `subagentStop` scripts to auto-invoke **doc-sync** after
-  **phase-executor** and **test-runner** via `followup_message`
-- `workflow-hooks.mdc` — hook installation, matchers, and requirements
+- **Extendable plugin marketplace** — `.cursor-plugin/marketplace.json` indexes plugins; workflow under `plugins/genai-agent-workflow/`; placeholders for `genai-js-rules` and `genai-ts-rules`
+- [plugins/README.md](./plugins/README.md) — how to add plugins (JS/TS later without a new repo submit)
+- `assets/ola.svg`, `LICENSE`, [MARKETPLACE.md](./MARKETPLACE.md); `subagentStop` hooks and `workflow-hooks.mdc`
+
+### Changed
+
+- **Breaking (layout):** agents, rules, and hooks moved from repo-root `.cursor/` to `plugins/genai-agent-workflow/`; ADR scaffold to `scaffold/adr/`; update manual install paths and local symlinks
+- Plugin hooks: `plugins/genai-agent-workflow/hooks/hooks.json` (paths relative to plugin root)
+- Marketplace publish uses root `marketplace.json` (one repo URL for multiple plugins over time)
 
 ### Changed
 

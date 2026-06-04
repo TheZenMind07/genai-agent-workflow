@@ -4,125 +4,110 @@
 
 Organization-wide **Cursor agent workflow** rules and subagent definitions for AI-assisted feature delivery.
 
-Also published as a **Cursor Marketplace plugin** (`genai-agent-workflow`) — see [MARKETPLACE.md](./MARKETPLACE.md).
+Published as an **extendable plugin marketplace** under [`.cursor-plugin/marketplace.json`](./.cursor-plugin/marketplace.json) — see [MARKETPLACE.md](./MARKETPLACE.md) and [plugins/README.md](./plugins/README.md).
 
 ## Overview
 
-This repository provides:
+| Piece | Location |
+|-------|----------|
+| **Workflow plugin** (agents, rules, hooks) | [`plugins/genai-agent-workflow/`](./plugins/genai-agent-workflow/) |
+| **JS standards plugin** | [`plugins/genai-js-rules/`](./plugins/genai-js-rules/) — *planned* |
+| **TS standards plugin** | [`plugins/genai-ts-rules/`](./plugins/genai-ts-rules/) — *planned* |
+| **ADR scaffold** (manual copy) | [`scaffold/adr/`](./scaffold/adr/) |
+| **Doc conventions** (repo guides) | [`docs/`](./docs/) |
 
-- **Workflow rules** (`.cursor/rules/`) — agent lifecycle, SDD structure under `docs/sdd/`, ADRs, and documentation sync
-- **Subagent definitions** (`.cursor/agents/`) — planning (including requirements), execution, testing, and doc sync roles
-- **ADR scaffold** (`.cursor/adr/`) — template and README for architectural decision records in consuming repos
+Agent guidance is **framework-agnostic**. JavaScript and TypeScript rule plugins will be added in this same repo later; until then, use sibling repos or merge rules manually.
 
-Agent guidance is **framework-agnostic** (tech-stack neutral). It does not assume Node.js, Express, TypeScript, or any specific language, runtime, or test runner. Pair this repo with language/runtime standards repos when your stack needs them.
+## When to use this repo vs standards
 
-## When to use this repo vs standards repos
+| Need | Source |
+|------|--------|
+| Subagent chain (plan → execute → test → doc sync) | **genai-agent-workflow** plugin (this repo) |
+| JavaScript baseline | **genai-js-rules** plugin here *(planned)* or [genai_js_rules](https://github.com/ola-mobility/genai_js_rules) |
+| TypeScript conventions | **genai-ts-rules** plugin here *(planned)* or [genai_ts_rules](https://github.com/ola-mobility/genai_ts_rules) |
+| Node.js coding, architecture, lint, security | [genai_node_rules](https://github.com/ola-mobility/genai_node_rules) *(optional)* |
 
-| Need | Repository |
-|------|------------|
-| Subagent chain (plan → execute → test → doc sync) | **genai_agent_rules** (this repo) |
-| Node.js coding, architecture, lint, security, testing | [genai_node_rules](https://github.com/ola-mobility/genai_node_rules) *(optional)* |
-| TypeScript conventions | [genai_ts_rules](https://github.com/ola-mobility/genai_ts_rules) *(optional)* |
-| JavaScript baseline | [genai_js_rules](https://github.com/ola-mobility/genai_js_rules) *(optional)* |
-
-Use **genai_agent_rules** when your team runs the investigate → plan → execute → verify agent chain with `docs/investigation/`, SDDs under `docs/sdd/`, and test reports under `docs/sdd/test-reports/`.
-
-Use optional sibling standards repos for how code is written in a given stack — coding style, architecture patterns, linting, security, and testing conventions. Merge only the repos your project needs into the same `.cursor/rules/` tree; agents follow whatever stack rules are present there.
-
-## Combining repos
-
-Install this repo first for workflow agents and rules, then merge optional stack-specific rules into the same `.cursor/` tree:
-
-```bash
-# Agent workflow (required for the subagent chain)
-cp -r /path/to/genai_agent_rules/.cursor/agents /path/to/your-project/.cursor/
-cp -r /path/to/genai_agent_rules/.cursor/rules/* /path/to/your-project/.cursor/rules/
-cp -r /path/to/genai_agent_rules/.cursor/adr /path/to/your-project/.cursor/
-cp /path/to/genai_agent_rules/.cursor/hooks.json /path/to/your-project/.cursor/
-cp -r /path/to/genai_agent_rules/.cursor/hooks /path/to/your-project/.cursor/
-chmod +x /path/to/your-project/.cursor/hooks/*.sh
-
-# Optional: stack-specific coding standards (example — use only what your stack needs)
-cp -r /path/to/genai_node_rules/.cursor/rules/* /path/to/your-project/.cursor/rules/
-```
-
-Teams on other stacks can substitute their own standards repo or project-local rules under `.cursor/rules/` instead of the Node/TS/JS siblings above.
+Use **genai_agent_rules** when your team runs the investigate → plan → execute → verify chain with `docs/investigation/`, SDDs under `docs/sdd/`, and test reports under `docs/sdd/test-reports/`.
 
 ## Repository structure
 
 ```txt
 genai_agent_rules/
-│
-├── README.md
-├── CONTRIBUTING.md
-├── CHANGELOG.md
-├── OWNERS.md
-│
-├── docs/
-│   ├── investigation/
-│   │   └── README.md
-│   └── sdd/
-│       ├── README.md
-│       └── test-reports/
-│           └── README.md
-│
 ├── .cursor-plugin/
-│   └── plugin.json
-├── assets/
-│   └── ola.svg
-└── .cursor/
-    ├── hooks.json
-    ├── hooks/
-    │   ├── invoke-doc-sync-after-phase-executor.sh
-    │   └── invoke-doc-sync-after-test-runner.sh
-    ├── adr/
-    │   ├── README.md
-    │   └── 0000-template.md
-    ├── rules/
-    │   ├── agent-workflow-boundaries.mdc
-    │   ├── architectural-decisions.mdc
-    │   ├── planning-documents.mdc
-    │   ├── investigation-reports.mdc
-    │   ├── test-reports.mdc
-    │   ├── documentation-sync.mdc
-    │   └── workflow-hooks.mdc
-    └── agents/
-        ├── code-investigator.mdc
-        ├── architect-planner.mdc
-        ├── phase-executor.mdc
-        ├── doc-sync.mdc
-        ├── test-runner.mdc
-        └── rule-feedback-writer.mdc
+│   └── marketplace.json          # indexes plugins (workflow now; JS/TS later)
+├── plugins/
+│   ├── README.md                 # how to add plugins
+│   ├── genai-agent-workflow/     # agents, rules, hooks
+│   ├── genai-js-rules/           # planned
+│   └── genai-ts-rules/           # planned
+├── scaffold/adr/                 # copy to consuming .cursor/adr/
+├── assets/ola.svg
+└── docs/                           # SDD, investigation, test-report guides
 ```
 
 ## Installation
 
 ### Cursor Marketplace (recommended)
 
-1. Open **Cursor → Settings → Plugins** (or the marketplace panel).
-2. Install **GenAI Agent Workflow** (`genai-agent-workflow`), or submit this repo via [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish) if you are a maintainer.
-3. Copy `.cursor/adr/` into your project when you use ADRs (see [MARKETPLACE.md](./MARKETPLACE.md)).
+1. Open **Cursor → Settings → Plugins**.
+2. Install **GenAI Agent Workflow** (`genai-agent-workflow`) from the **ola-genai-plugins** marketplace (this repo).
+3. When **genai-js-rules** / **genai-ts-rules** are published, install them from the same marketplace as needed.
+4. Copy ADR scaffold: `cp -r scaffold/adr /path/to/your-project/.cursor/adr`
 
-### Manual copy
-
-Copy or symlink into your project (merge with any existing `.cursor/` content):
+### Manual copy (workflow plugin)
 
 ```bash
-# From a clone of this repo
-cp -r .cursor/rules/*   /path/to/your-project/.cursor/rules/
-cp -r .cursor/agents/*  /path/to/your-project/.cursor/agents/
-cp -r .cursor/adr       /path/to/your-project/.cursor/
-# Optional: automate doc-sync handoffs after phase-executor and test-runner
-cp .cursor/hooks.json   /path/to/your-project/.cursor/
-cp -r .cursor/hooks     /path/to/your-project/.cursor/
-chmod +x /path/to/your-project/.cursor/hooks/*.sh
+REPO=/path/to/genai_agent_rules
+DEST=/path/to/your-project/.cursor
+PLUGIN=genai-agent-workflow
+
+mkdir -p "$DEST/agents" "$DEST/rules" "$DEST/hooks"
+cp -r "$REPO/plugins/$PLUGIN/agents/"* "$DEST/agents/"
+cp -r "$REPO/plugins/$PLUGIN/rules/"*  "$DEST/rules/"
+cp "$REPO/plugins/$PLUGIN/hooks/"*.sh   "$DEST/hooks/"
+chmod +x "$DEST/hooks/"*.sh
+
+# Project-level hooks.json (paths relative to project root)
+cat > "$DEST/hooks.json" <<'EOF'
+{
+  "version": 1,
+  "hooks": {
+    "subagentStop": [
+      {
+        "command": ".cursor/hooks/invoke-doc-sync-after-phase-executor.sh",
+        "matcher": "phase-executor",
+        "loop_limit": 3
+      },
+      {
+        "command": ".cursor/hooks/invoke-doc-sync-after-test-runner.sh",
+        "matcher": "test-runner",
+        "loop_limit": 3
+      }
+    ]
+  }
+}
+EOF
+
+cp -r "$REPO/scaffold/adr" "$DEST/adr"
 ```
 
-Or add as a submodule and link both `rules` and `agents` directories.
+Optional stack rules (until JS/TS plugins ship):
 
-In Cursor, subagents are available when `.cursor/agents/*.mdc` is present; workflow rules with `alwaysApply: true` apply to every agent session.
+```bash
+cp -r /path/to/genai_node_rules/.cursor/rules/* "$DEST/rules/"
+```
+
+### Local plugin development
+
+```bash
+ln -sf "$(pwd)/plugins/genai-agent-workflow" ~/.cursor/plugins/local/genai-agent-workflow
+```
+
+Reload Cursor (**Developer: Reload Window**).
 
 ## Workflow rules
+
+Shipped in `plugins/genai-agent-workflow/rules/` (installed to `.cursor/rules/` in consuming repos).
 
 | Rule | Focus |
 |------|-------|
@@ -147,8 +132,8 @@ In Cursor, subagents are available when `.cursor/agents/*.mdc` is present; workf
 
 ## Versioning
 
-See [CHANGELOG.md](./CHANGELOG.md) for release history. Pin consuming repos to git tags (`vMAJOR.MINOR.PATCH`); see [CONTRIBUTING.md](./CONTRIBUTING.md) for how to cut a release.
+See [CHANGELOG.md](./CHANGELOG.md). Pin consuming repos to git tags (`vMAJOR.MINOR.PATCH`).
 
 ## Contributing
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md). Maintainers are listed in [OWNERS.md](./OWNERS.md).
+See [CONTRIBUTING.md](./CONTRIBUTING.md). To add a plugin (e.g. JS/TS), follow [plugins/README.md](./plugins/README.md).

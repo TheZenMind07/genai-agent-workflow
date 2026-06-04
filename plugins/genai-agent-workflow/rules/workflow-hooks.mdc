@@ -5,8 +5,9 @@ alwaysApply: false
 
 # Workflow Hooks
 
-Consuming repos may install `.cursor/hooks.json` and `.cursor/hooks/*` from this repository to
-automate handoffs that are otherwise described only in rules.
+Consuming repos may install hooks from the **genai-agent-workflow** plugin (`hooks/hooks.json`
+and `hooks/*.sh` in this plugin directory) or an equivalent `.cursor/hooks.json` layout in the
+project to automate handoffs described in other workflow rules.
 
 ## subagentStop → doc-sync
 
