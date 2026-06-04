@@ -8,7 +8,8 @@ globs:
 
 ## Sync Points
 
-`doc-sync` must be invoked at exactly two points per phase:
+`doc-sync` must be invoked at exactly two points per phase (enforced by parent agent or
+optional `subagentStop` hooks in `.cursor/hooks.json`):
 
 1. **After `phase-executor` completes** — to capture implementation status, changed files,
    risks, pending work, and next phase in the planning doc.

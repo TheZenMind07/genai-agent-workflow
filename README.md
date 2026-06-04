@@ -36,6 +36,9 @@ Install this repo first for workflow agents and rules, then merge optional stack
 cp -r /path/to/genai_agent_rules/.cursor/agents /path/to/your-project/.cursor/
 cp -r /path/to/genai_agent_rules/.cursor/rules/* /path/to/your-project/.cursor/rules/
 cp -r /path/to/genai_agent_rules/.cursor/adr /path/to/your-project/.cursor/
+cp /path/to/genai_agent_rules/.cursor/hooks.json /path/to/your-project/.cursor/
+cp -r /path/to/genai_agent_rules/.cursor/hooks /path/to/your-project/.cursor/
+chmod +x /path/to/your-project/.cursor/hooks/*.sh
 
 # Optional: stack-specific coding standards (example — use only what your stack needs)
 cp -r /path/to/genai_node_rules/.cursor/rules/* /path/to/your-project/.cursor/rules/
@@ -62,6 +65,10 @@ genai_agent_rules/
 │           └── README.md
 │
 └── .cursor/
+    ├── hooks.json
+    ├── hooks/
+    │   ├── invoke-doc-sync-after-phase-executor.sh
+    │   └── invoke-doc-sync-after-test-runner.sh
     ├── adr/
     │   ├── README.md
     │   └── 0000-template.md
@@ -71,7 +78,8 @@ genai_agent_rules/
     │   ├── planning-documents.mdc
     │   ├── investigation-reports.mdc
     │   ├── test-reports.mdc
-    │   └── documentation-sync.mdc
+    │   ├── documentation-sync.mdc
+    │   └── workflow-hooks.mdc
     └── agents/
         ├── code-investigator.mdc
         ├── architect-planner.mdc
@@ -90,6 +98,10 @@ Copy or symlink into your project (merge with any existing `.cursor/` content):
 cp -r .cursor/rules/*   /path/to/your-project/.cursor/rules/
 cp -r .cursor/agents/*  /path/to/your-project/.cursor/agents/
 cp -r .cursor/adr       /path/to/your-project/.cursor/
+# Optional: automate doc-sync handoffs after phase-executor and test-runner
+cp .cursor/hooks.json   /path/to/your-project/.cursor/
+cp -r .cursor/hooks     /path/to/your-project/.cursor/
+chmod +x /path/to/your-project/.cursor/hooks/*.sh
 ```
 
 Or add as a submodule and link both `rules` and `agents` directories.
@@ -106,6 +118,7 @@ In Cursor, subagents are available when `.cursor/agents/*.mdc` is present; workf
 | `investigation-reports.mdc` | Investigation reports under `docs/investigation/` |
 | `test-reports.mdc` | Test execution reports under `docs/sdd/test-reports/` |
 | `documentation-sync.mdc` | Sync plan docs after implementation and verification |
+| `workflow-hooks.mdc` | Optional `subagentStop` hooks for doc-sync handoffs |
 
 ## Subagents
 
