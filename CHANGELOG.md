@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- `agent-workflow-boundaries.mdc` — distinguish planned-work lifecycle from standalone subagent use; handoffs optional for standalone tasks when required
+
 ### Added
 
 - **Extendable plugin marketplace** — `.cursor-plugin/marketplace.json` indexes plugins; workflow under `plugins/genai-agent-workflow/`; placeholders for `genai-js-rules` and `genai-ts-rules`

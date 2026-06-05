@@ -1,13 +1,14 @@
 ---
-description: Agent lifecycle, parallelisation, and guidance placement boundaries
+description: Planned-work lifecycle, standalone subagent use, parallelisation, and guidance placement boundaries
 alwaysApply: true
 ---
 
 # Agent Workflow Boundaries
 
-## Lifecycle Order
+## Planned-Work Lifecycle
 
-For planned work, follow this agent chain:
+For **planned work** (features, refactors, or other tasks that will change code and produce
+SDDs), follow this agent chain in order when each step applies:
 
 1. **`code-investigator`** — when existing behaviour or architecture must be understood first.
 2. **`architect-planner`** — clarifies vague requirements and produces a phased plan under
@@ -19,7 +20,31 @@ For planned work, follow this agent chain:
 6. **`doc-sync`** again — syncs verification status, coverage, and residual risk into the planning doc.
 7. **`rule-feedback-writer`** — persists any durable guidance changes raised during the above steps.
 
+Do not run the full chain for read-only Q&A, investigations, or other tasks with no planned
+code change.
+
+## Standalone Subagent Use
+
+The lifecycle above governs **planned work only**. Individual subagents may be spawned whenever
+the task benefits from specialised, focused work — not only as steps in that chain.
+
+| Subagent | Standalone when |
+| --- | --- |
+| **`code-investigator`** | Read-only questions: "how does X work?", API or flow overviews, log-backed traces. Produces `docs/investigation/<slug>.md` when a durable report is useful. |
+| **`architect-planner`** | Vague or large scope that needs a phased plan before any implementation. |
+| **`phase-executor`**, **`test-runner`**, **`doc-sync`**, **`rule-feedback-writer`** | Planned work only — these mutate code, tests, plans, or durable guidance. |
+
+The parent agent decides whether to answer inline or spawn a subagent based on scope, complexity,
+and whether a durable artifact is warranted. Narrow, specific questions may be answered directly
+with read/grep tools; broad, ambiguous, or cross-cutting questions should prefer a read-only
+subagent (e.g. **`code-investigator`**, **`explore`**) rather than skipping delegation because
+the task is not planned work.
+
 ## Handoff Rules
+
+Follow these handoffs for the **planned-work lifecycle**. For **standalone** subagents, apply the
+same handoffs only when the task requires it (e.g. linking an investigation report into an
+existing SDD, or syncing a one-off implementation back to a plan).
 
 - After `phase-executor` completes, hand off to `doc-sync` **before** verification so the
   planning doc captures implementation status, changed files, risks, pending work, and next phase.
