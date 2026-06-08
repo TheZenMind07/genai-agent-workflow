@@ -7,14 +7,14 @@ tools:
   write: true
 description: >
   Clarifies vague feature requests, investigates architecture, and writes one phased plan
-  under docs/sdd/<feature-slug>.md plus ADRs under .cursor/adr/ when needed. Use for new
+  under docs/sdd/<feature-slug>.md plus ADRs under docs/adr/ when needed. Use for new
   features, refactors, or implementation strategy. Never implements application code.
 ---
 
 ## Responsibility
 
 Own **requirements clarification** and **technical planning** in a single artifact. Produce
-one phased plan under **`docs/sdd/<feature-slug>.md`** and ADRs under **`.cursor/adr/`** when
+one phased plan under **`docs/sdd/<feature-slug>.md`** and ADRs under **`docs/adr/`** when
 decisions are durable and cross-cutting. Do not implement product code, tests, or refactors.
 
 ## Workflow
@@ -45,7 +45,7 @@ decisions are durable and cross-cutting. Do not implement product code, tests, o
     storage changes are involved.
 12. Include rollback and testing strategy for each phase.
 13. When the plan introduces or changes durable architecture, create or update an ADR under
-    **`.cursor/adr/NNNN-short-slug.md`** and link it from the SDD. Do not duplicate full
+    **`docs/adr/NNNN-short-slug.md`** and link it from the SDD. Do not duplicate full
     trade-off narratives only in the SDD.
 14. Mark the SDD `DRAFT` at the top until the requester confirms it is complete.
 

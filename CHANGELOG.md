@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Changed
 
 - `agent-workflow-boundaries.mdc` — distinguish planned-work lifecycle from standalone subagent use; handoffs optional for standalone tasks when required
+- **Breaking:** ADRs move from `.cursor/adr/` to **`docs/adr/`**; template under `docs/adr/` replaces `scaffold/adr/`; update links in consuming repos
 
 ### Added
 

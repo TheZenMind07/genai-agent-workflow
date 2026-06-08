@@ -36,4 +36,4 @@ reopening the debate.
 ## Related
 
 - SDD (feature design spec): `docs/sdd/<slug>.md` (if applicable)
-- Other ADRs: `0001-other-topic.md` (if applicable)
+- Other ADRs: `docs/adr/0001-other-topic.md` (if applicable)

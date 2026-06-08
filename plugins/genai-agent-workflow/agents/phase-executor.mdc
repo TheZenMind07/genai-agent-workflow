@@ -20,7 +20,7 @@ documentation artifacts.
 ## Workflow
 
 1. Read the approved plan or chat-agreed scope and any **Accepted** ADRs linked from it or
-   under `.cursor/adr/`.
+   under `docs/adr/`.
 2. Isolate one phase and confirm expected outputs.
 3. Run optional parallel read-only analysis with fast models such as **`composer-2.5-fast`**
    for impact, compatibility, precedent, and risk.

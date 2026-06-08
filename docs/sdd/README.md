@@ -32,7 +32,7 @@ sections are defined in `.cursor/rules/test-reports.mdc`. See `docs/sdd/test-rep
 |----------|----------|---------|
 | **SDD** | `docs/sdd/<slug>.md` | What to build and how to deliver it in phases |
 | **Test report** | `docs/sdd/test-reports/<slug>.md` | Command evidence and coverage for verification |
-| **ADR** | `.cursor/adr/NNNN-*.md` | Durable cross-cutting decisions and trade-offs |
+| **ADR** | `docs/adr/NNNN-*.md` | Durable cross-cutting decisions and trade-offs |
 
 Do not store ADRs under `docs/sdd/`. Link from the SDD to relevant **Accepted** ADRs and test
 reports instead of duplicating full decision or verification narratives.
@@ -40,6 +40,7 @@ reports instead of duplicating full decision or verification narratives.
 ## Migrating older layouts
 
 - **`docs/feature/`** — move plans to `docs/sdd/<slug>.md` and update links in ADRs and test reports.
+- **`.cursor/adr/`** — move ADRs to `docs/adr/` and update links in SDDs and test reports.
 - **`docs/test-reports/`** (repo root) — move reports to `docs/sdd/test-reports/<slug>.md`.
 - **`docs/requirements/`** — merge each `docs/requirements/<slug>.md` into the matching SDD under
   `docs/sdd/<slug>.md` using the requirements sections in `planning-documents.mdc`, then retire the
