@@ -56,8 +56,8 @@ cp "$REPO/plugins/$PLUGIN/hooks/hooks.json" "$DEST/hooks.json" 2>/dev/null || \
 chmod +x "$DEST/hooks/"*.sh 2>/dev/null || chmod +x "$DEST/"*.sh 2>/dev/null || true
 ```
 
-ADR scaffold (not part of the workflow plugin): copy [`../scaffold/adr/`](../scaffold/adr/) to
-`your-project/.cursor/adr/`.
+ADR template (not part of the workflow plugin): bootstrap from [`../docs/adr/`](../docs/adr/) into
+`your-project/docs/adr/`.
 
 ## Planned: JavaScript and TypeScript
 

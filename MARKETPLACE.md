@@ -26,7 +26,7 @@ Add JS/TS by creating `plugins/genai-js-rules/` (or `-ts-`) with a manifest and 
 1. Open **Cursor Settings → Plugins**.
 2. Find plugins from this repo (marketplace id: **ola-genai-plugins**).
 3. Install **genai-agent-workflow**; add JS/TS plugins when listed.
-4. Copy [`scaffold/adr/`](./scaffold/adr/) to `your-project/.cursor/adr/` when using ADRs.
+4. Bootstrap [`docs/adr/`](./docs/adr/) in your project when using ADRs (`mkdir -p docs/adr` and copy the template).
 
 ## Publish / update listing
 
@@ -66,4 +66,4 @@ echo '{"status":"completed"}' | plugins/genai-agent-workflow/hooks/invoke-doc-sy
 
 - **Extendable monorepo** — new plugins = new folder under `plugins/` + `marketplace.json` entry.
 - Keep **genai-agent-workflow** framework-agnostic; put JS/TS (and later Node) rules in separate plugins.
-- ADR template stays under `scaffold/adr/` (not installed by plugins automatically).
+- ADR template stays under `docs/adr/` (not installed by plugins automatically).

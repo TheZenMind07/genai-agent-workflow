@@ -12,7 +12,7 @@ SDDs), follow this agent chain in order when each step applies:
 
 1. **`code-investigator`** — when existing behaviour or architecture must be understood first.
 2. **`architect-planner`** — clarifies vague requirements and produces a phased plan under
-   `docs/sdd/<slug>.md`; creates or updates ADRs under `.cursor/adr/` when the work introduces
+   `docs/sdd/<slug>.md`; creates or updates ADRs under `docs/adr/` when the work introduces
    durable architectural decisions.
 3. **`phase-executor`** — implements one approved phase per pass.
 4. **`doc-sync`** — syncs implementation status back into the planning doc immediately after execution.
@@ -66,7 +66,7 @@ existing SDD, or syncing a one-off implementation back to a plan).
 
 - `phase-executor` must not create or update planning docs, execution notes, test reports, or ADRs.
 - `architect-planner` must not implement application code, tests, or configuration.
-- `architect-planner` should record durable cross-cutting decisions in `.cursor/adr/` (see
+- `architect-planner` should record durable cross-cutting decisions in `docs/adr/` (see
   `architectural-decisions.mdc`), not only in SDDs under `docs/sdd/`.
 - `doc-sync` must not modify product code or tests unless explicitly instructed.
 - `test-runner` must not claim tests passed without real command output evidence.
@@ -82,7 +82,7 @@ existing SDD, or syncing a one-off implementation back to a plan).
   [genai_ts_rules](https://github.com/ola-mobility/genai_ts_rules),
   [genai_js_rules](https://github.com/ola-mobility/genai_js_rules)) may install into the same
   `.cursor/rules/` directory in consuming repos — teams merge only what their stack needs.
-- `.cursor/adr/*.md` — durable architectural decisions (patterns, trade-offs, boundaries, stack
+- `docs/adr/*.md` — durable architectural decisions (patterns, trade-offs, boundaries, stack
   and cross-cutting workflow choices) for consuming repos; see `architectural-decisions.mdc`.
 - Keep feature-specific API details, endpoint matrices, incident notes, and one-off facts in
   planning, execution, test-report, or investigation docs — not in agent or rule files.

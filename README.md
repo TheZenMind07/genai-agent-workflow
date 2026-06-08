@@ -13,8 +13,7 @@ Published as an **extendable plugin marketplace** under [`.cursor-plugin/marketp
 | **Workflow plugin** (agents, rules, hooks) | [`plugins/genai-agent-workflow/`](./plugins/genai-agent-workflow/) |
 | **JS standards plugin** | [`plugins/genai-js-rules/`](./plugins/genai-js-rules/) — *planned* |
 | **TS standards plugin** | [`plugins/genai-ts-rules/`](./plugins/genai-ts-rules/) — *planned* |
-| **ADR scaffold** (manual copy) | [`scaffold/adr/`](./scaffold/adr/) |
-| **Doc conventions** (repo guides) | [`docs/`](./docs/) |
+| **Doc conventions** (SDDs, ADRs, investigations, test reports) | [`docs/`](./docs/) |
 
 Agent guidance is **framework-agnostic**. JavaScript and TypeScript rule plugins will be added in this same repo later; until then, use sibling repos or merge rules manually.
 
@@ -27,7 +26,7 @@ Agent guidance is **framework-agnostic**. JavaScript and TypeScript rule plugins
 | TypeScript conventions | **genai-ts-rules** plugin here *(planned)* or [genai_ts_rules](https://github.com/ola-mobility/genai_ts_rules) |
 | Node.js coding, architecture, lint, security | [genai_node_rules](https://github.com/ola-mobility/genai_node_rules) *(optional)* |
 
-Use **genai_agent_rules** when your team runs the investigate → plan → execute → verify chain with `docs/investigation/`, SDDs under `docs/sdd/`, and test reports under `docs/sdd/test-reports/`.
+Use **genai_agent_rules** when your team runs the investigate → plan → execute → verify chain with `docs/investigation/`, SDDs under `docs/sdd/`, ADRs under `docs/adr/`, and test reports under `docs/sdd/test-reports/`.
 
 ## Repository structure
 
@@ -40,9 +39,8 @@ genai_agent_rules/
 │   ├── genai-agent-workflow/     # agents, rules, hooks
 │   ├── genai-js-rules/           # planned
 │   └── genai-ts-rules/           # planned
-├── scaffold/adr/                 # copy to consuming .cursor/adr/
 ├── assets/ola.svg
-└── docs/                           # SDD, investigation, test-report guides
+└── docs/                           # SDD, ADR, investigation, test-report guides
 ```
 
 ## Installation
@@ -52,7 +50,7 @@ genai_agent_rules/
 1. Open **Cursor → Settings → Plugins**.
 2. Install **GenAI Agent Workflow** (`genai-agent-workflow`) from the **ola-genai-plugins** marketplace (this repo).
 3. When **genai-js-rules** / **genai-ts-rules** are published, install them from the same marketplace as needed.
-4. Copy ADR scaffold: `cp -r scaffold/adr /path/to/your-project/.cursor/adr`
+4. Bootstrap ADRs when needed: `mkdir -p /path/to/your-project/docs/adr && cp -r docs/adr/* /path/to/your-project/docs/adr/`
 
 ### Manual copy (workflow plugin)
 
@@ -88,7 +86,8 @@ cat > "$DEST/hooks.json" <<'EOF'
 }
 EOF
 
-cp -r "$REPO/scaffold/adr" "$DEST/adr"
+mkdir -p /path/to/your-project/docs/adr
+cp -r "$REPO/docs/adr/"* /path/to/your-project/docs/adr/
 ```
 
 Optional stack rules (until JS/TS plugins ship):
@@ -112,7 +111,7 @@ Shipped in `plugins/genai-agent-workflow/rules/` (installed to `.cursor/rules/` 
 | Rule | Focus |
 |------|-------|
 | `agent-workflow-boundaries.mdc` | Subagent lifecycle, handoffs, parallelisation |
-| `architectural-decisions.mdc` | ADRs under `.cursor/adr/` and agent ownership |
+| `architectural-decisions.mdc` | ADRs under `docs/adr/` and agent ownership |
 | `planning-documents.mdc` | Feature design specs (SDDs) under `docs/sdd/` |
 | `investigation-reports.mdc` | Investigation reports under `docs/investigation/` |
 | `test-reports.mdc` | Test execution reports under `docs/sdd/test-reports/` |

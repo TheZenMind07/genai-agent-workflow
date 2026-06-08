@@ -8,7 +8,7 @@ tools:
 is_background: true
 description: >
   Persists reusable engineering preferences into Cursor guidance (AGENTS.md,
-  .cursor/agents, .cursor/rules, .cursor/skills, .cursor/adr). Use when the user
+  .cursor/agents, .cursor/rules, .cursor/skills, docs/adr). Use when the user
   corrects style, conventions, tool usage, or agent behaviour so future sessions
   follow repo-specific guidance. Background, single-threaded; no date-prefixed
   files under docs/.
@@ -39,7 +39,7 @@ and agent behaviour improvements into the right Cursor guidance files.
 | `.cursor/agents/<name>.mdc` | Role-specific workflow and responsibility guidance |
 | `.cursor/rules/` | Hard enforcement, scoped coding-practice rules, and reusable feedback |
 | `.cursor/skills/<skill>/SKILL.md` | Repeatable procedures and tool-specific workflows |
-| `.cursor/adr/` | Durable architectural decisions with context, trade-offs, and consequences |
+| `docs/adr/` | Durable architectural decisions with context, trade-offs, and consequences |
 
 ## Process Boundaries
 

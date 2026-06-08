@@ -42,4 +42,4 @@ optional `subagentStop` hooks in `.cursor/hooks.json`):
 | `docs/sdd/<slug>.md` | `architect-planner` | `doc-sync` |
 | `docs/sdd/test-reports/<slug>.md` | `test-runner` | `test-runner`, then `doc-sync` links |
 | `docs/investigation/<slug>.md` | `code-investigator` | `code-investigator` |
-| `.cursor/adr/NNNN-*.md` | `architect-planner`, `rule-feedback-writer` | same owners; `doc-sync` may link only |
+| `docs/adr/NNNN-*.md` | `architect-planner`, `rule-feedback-writer` | same owners; `doc-sync` may link only |

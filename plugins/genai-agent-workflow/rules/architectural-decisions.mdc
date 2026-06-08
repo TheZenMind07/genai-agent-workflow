@@ -1,18 +1,18 @@
 ---
-description: When and how to record architectural decisions under .cursor/adr/
+description: When and how to record architectural decisions under docs/adr/
 globs:
-  - ".cursor/adr/**/*.md"
+  - "docs/adr/**/*.md"
 ---
 
 # Architectural Decision Records (ADRs)
 
 ## Location
 
-Record durable architectural decisions in **`.cursor/adr/`** in the consuming repository.
+Record durable architectural decisions in **`docs/adr/`** in the consuming repository.
 One decision per file; do not store ADRs under `docs/sdd/` or agent/rule files.
 
-Copy this folder from **genai_agent_rules** when bootstrapping a project, or create it locally
-and add ADRs as decisions are made.
+Copy the template from **genai_agent_rules** `docs/adr/` when bootstrapping a project, or
+create `docs/adr/` locally and add ADRs as decisions are made.
 
 ## When to Write an ADR
 
@@ -41,8 +41,8 @@ When unsure, prefer a short ADR over burying the decision only in `docs/sdd/<slu
 Use a monotonic four-digit prefix and a short kebab-case slug:
 
 ```txt
-.cursor/adr/0001-short-slug.md
-.cursor/adr/0002-another-topic.md
+docs/adr/0001-short-slug.md
+docs/adr/0002-another-topic.md
 ```
 
 - Prefix: next unused number in the repo (zero-padded to four digits).

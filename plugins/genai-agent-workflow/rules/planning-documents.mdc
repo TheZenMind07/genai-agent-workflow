@@ -25,7 +25,7 @@ Every planning document must include the following sections in order:
 7. **Non-Functional Requirements** — performance, security, observability, and similar constraints
    (omit section if none apply).
 8. **Dependencies** — other features, services, teams, or **Accepted** ADRs under
-   `.cursor/adr/` that constrain this work (link paths; do not duplicate ADR bodies here).
+   `docs/adr/` that constrain this work (link paths; do not duplicate ADR bodies here).
 9. **Assumptions** — facts assumed true without verification.
 10. **Open Questions** — unresolved questions with an owner and due date.
 11. **API Changes** — list of APIs that will change or be newly introduced; include request
@@ -57,7 +57,7 @@ Use exactly these values in the status table:
 
 - Mark the document `DRAFT` at the top until the requester confirms it is complete.
 - Do not store feature-specific facts in agent or rule files; keep them here.
-- Record durable architectural decisions in `.cursor/adr/` per `architectural-decisions.mdc`;
+- Record durable architectural decisions in `docs/adr/` per `architectural-decisions.mdc`;
   link from this plan instead of embedding full trade-off narratives.
 - `doc-sync` is the only agent permitted to update the Phase Implementation Status table
   without explicit user instruction; link test reports from phase Notes when status is `Verified`.
