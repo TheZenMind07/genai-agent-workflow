@@ -6,8 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- `pull-request-requirements.mdc` — feature work merges via PR only; required PR description template (deployment prerequisites, SDD/ADR summary, verification, production instrumentation)
+
 ### Changed
 
+- `agent-workflow-boundaries.mdc` — add PR merge as final planned-work lifecycle step
 - `agent-workflow-boundaries.mdc` — distinguish planned-work lifecycle from standalone subagent use; handoffs optional for standalone tasks when required
 - **Breaking:** ADRs move from `.cursor/adr/` to **`docs/adr/`**; template under `docs/adr/` replaces `scaffold/adr/`; update links in consuming repos
 

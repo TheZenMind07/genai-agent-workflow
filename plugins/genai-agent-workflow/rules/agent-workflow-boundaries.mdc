@@ -19,6 +19,8 @@ SDDs), follow this agent chain in order when each step applies:
 5. **`test-runner`** — reviews diff, adds/updates tests, runs verification, writes test report.
 6. **`doc-sync`** again — syncs verification status, coverage, and residual risk into the planning doc.
 7. **`rule-feedback-writer`** — persists any durable guidance changes raised during the above steps.
+8. **Pull request** — merge the feature via PR using the description template in
+   `pull-request-requirements.mdc` (one PR per feature, not per commit).
 
 Do not run the full chain for read-only Q&A, investigations, or other tasks with no planned
 code change.
