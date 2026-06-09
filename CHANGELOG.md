@@ -9,11 +9,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Added
 
 - `rule-placement.mdc` — categorise rules under `.cursor/rules/agent/`, `language/`, or framework-specific folders (e.g. `node24/`)
+- `pull-request-requirements.mdc` — feature work merges via PR only; required PR description template (deployment prerequisites, SDD/ADR summary, verification, production instrumentation)
 
 ### Changed
 
 - `rule-feedback-writer` — classifies feedback and writes rules into categorised `.cursor/rules/<category>/` paths
 - `agent-workflow-boundaries.mdc` — document categorised `.cursor/rules/<category>/` layout
+- `agent-workflow-boundaries.mdc` — add PR merge as final planned-work lifecycle step
 - `agent-workflow-boundaries.mdc` — distinguish planned-work lifecycle from standalone subagent use; handoffs optional for standalone tasks when required
 - **Breaking:** ADRs move from `.cursor/adr/` to **`docs/adr/`**; template under `docs/adr/` replaces `scaffold/adr/`; update links in consuming repos
 
