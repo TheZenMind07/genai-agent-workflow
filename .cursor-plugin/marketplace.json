@@ -1,0 +1,16 @@
+{
+  "name": "genai-plugins",
+  "owner": {
+    "name": "Rajkishor"
+  },
+  "metadata": {
+    "description": "GenAI Cursor plugins: framework-agnostic agent workflow today; JavaScript and TypeScript standards plugins planned in this repository."
+  },
+  "plugins": [
+    {
+      "name": "genai-agent-workflow",
+      "source": "plugins/genai-agent-workflow",
+      "description": "Subagent workflow for investigate, plan, execute, doc-sync, test, and verify. Rules, agents, and optional hooks."
+    }
+  ]
+}
