@@ -1,0 +1,121 @@
+---
+description: Feature work merges via PR only; required PR description sections and evidence sources
+alwaysApply: true
+---
+
+# Feature Pull Requests
+
+## Merge Policy
+
+- **All feature work merges via pull request.** Do not push feature changes directly to protected
+  branches (e.g. `main`, `master`, `release/*`).
+- **One PR per feature**, not one PR per commit. The branch may contain multiple commits; the PR
+  description is the single delivery record for the whole feature.
+- Open or update the PR after **`test-runner`** and the second **`doc-sync`** pass complete, unless
+  the user explicitly requests an earlier draft PR for review.
+- Small fixes with no SDD may still use a PR; use `N/A` in SDD/ADR sections and keep verification
+  evidence in section 3.
+
+## PR Title
+
+Use the feature slug or a short feature name that matches `docs/sdd/<feature-slug>.md` when an SDD
+exists.
+
+## Required PR Description Sections
+
+Copy the template below into the PR body. Fill every subsection; use `None` or `N/A` when a
+subsection does not apply — do not omit headings.
+
+```markdown
+## 1. Deployment prerequisites
+
+List everything that must happen **before or during** deploy for this feature to work. For each
+item, include concrete steps and commands (or links to runbooks).
+
+### Config changes
+- [ ] Required / Not required
+- Files or keys:
+- Steps and commands:
+
+### api contract upstream or Downstream changes
+- [ ] Required / Not required
+- Schema or artifact:
+- Steps and commands:
+
+### Database changes
+- [ ] Required / Not required
+- Migrations, indexes, backfill:
+- Steps and commands:
+
+### Redis changes
+- [ ] Required / Not required
+- Keys, TTL, data structure:
+- Steps and commands:
+
+### Deploy order
+- Prerequisites before app deploy:
+- Safe rollback notes:
+
+## 2. Changes summary
+
+### Feature overview
+- What changed and why (2–4 sentences).
+
+### SDD
+- Path: `docs/sdd/<feature-slug>.md`
+- Phases delivered in this PR:
+- Open questions or follow-ups:
+
+### ADRs
+- [ ] No new or updated ADRs
+- Related ADRs (link paths under `docs/adr/`):
+- Status of each (`Proposed` / `Accepted` / `Superseded`):
+
+## 3. Verification
+
+### Tests
+- Test report: `docs/sdd/test-reports/<feature-slug>.md`
+- [ ] All planned tests passed
+- [ ] Partial pass — list failures and residual risk
+- [ ] Not run — reason:
+
+### Linting and static checks
+- [ ] Checked by agent (`test-runner` or parent agent)
+- [ ] Not checked — reason:
+- Commands run (with exit codes):
+
+## 4. Instrumentation and production verification
+
+### Instrumentation added or changed
+- Metrics, logs, traces, alerts (names and where emitted):
+- Dashboards or monitors to update:
+
+### How to verify in production
+1. Deploy prerequisite check:
+2. Smoke test steps:
+3. Log queries or filters (include example query / field names):
+4. Metric or alert checks:
+5. Success criteria:
+```
+
+## Evidence Sources
+
+| PR section | Primary source |
+| --- | --- |
+| Deployment prerequisites | SDD **Data / Storage Changes**, **Dependencies**, phase rollback/testing notes; implementation diff |
+| Changes summary | SDD, linked ADRs, PR diff |
+| Verification | `docs/sdd/test-reports/<feature-slug>.md`, SDD phase status table |
+| Instrumentation | SDD **Non-Functional Requirements** (observability), code diff |
+
+Do not mark tests or linting as passed without command evidence. Do not claim production readiness
+without explicit verification steps in section 4.
+
+## Agent Responsibilities
+
+- **`architect-planner`** — ensure SDD and ADRs exist and are linked before implementation PRs.
+- **`phase-executor`** — surface config, schema, DB, and Redis impacts in code and phase notes so
+  section 1 can be filled accurately.
+- **`test-runner`** — produce the test report and command evidence used in section 3.
+- **`doc-sync`** — keep SDD phase status current so section 2 reflects verified phases.
+- **Parent agent** — when creating or updating the PR, assemble sections 1–4 from SDD, ADRs, test
+  report, and diff; never invent deployment steps or verification results.
