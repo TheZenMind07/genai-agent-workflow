@@ -1,0 +1,52 @@
+---
+description: Structure and content requirements for investigation reports under docs/investigation/
+globs:
+  - "docs/investigation/**/*.md"
+---
+
+# Investigation Reports
+
+## Location
+
+All investigation reports live under **`docs/investigation/<topic-slug>.md`**.
+One file per investigation topic; do not split a single investigation across multiple files.
+
+Use a kebab-case slug (e.g. `checkout-timeout`, `auth-token-refresh`). Create `docs/investigation/`
+if it does not exist.
+
+## Required Sections
+
+Every investigation report must include the following sections in order:
+
+1. **Question** — the investigation ask, including any provided logs, IDs, or error text.
+2. **Summary** — concise answer in plain language (2–5 sentences).
+3. **Key Findings** — bullet list of verified facts only; label unverified items as assumptions
+   in section 11.
+4. **APIs Involved** — HTTP/RPC/event APIs touched on the path (method, path or operation name,
+   caller, downstream dependencies). Omit section only when no external or internal API surface
+   is involved.
+5. **Flow Diagram** — Mermaid sequence or flowchart for the primary path under investigation.
+6. **Call Flow** — narrative walkthrough of execution order across modules and boundaries.
+7. **Code Pointers** — table or list of `path:line` (or symbol) references; no vague file-only
+   mentions when a line is known.
+8. **Snippets** — minimal excerpts only where pointers alone are insufficient; prefer pointers.
+9. **Reproduction Scenarios** — numbered steps, preconditions, test data, and expected vs
+   observed behaviour to recreate the issue or validate the flow. Use `N/A` only for pure
+   "how does X work?" explorations with no defect or incident.
+10. **Log Analysis** — correlate provided logs, stack traces, and IDs to the call flow (omit if
+    no logs were supplied).
+11. **Files Involved** — paths grouped by role (entrypoint, handler, service, persistence, config).
+12. **Assumptions** — inferences not confirmed in code or logs.
+13. **Gaps and Open Questions** — what could not be verified and what to check next.
+
+## Evidence
+
+- Separate **facts** (read from code or logs) from **assumptions**.
+- Code pointers must be precise enough for a human to jump to the location in the repo.
+- Flow diagrams must match the traced call flow; update the diagram if the narrative changes.
+
+## Ownership
+
+`code-investigator` creates and updates investigation reports. Other agents may **link** to a
+report from SDDs or execution notes but must not rewrite investigation findings unless explicitly
+instructed to extend the same investigation.

@@ -1,0 +1,83 @@
+---
+description: When and how to record architectural decisions under docs/adr/
+globs:
+  - "docs/adr/**/*.md"
+---
+
+# Architectural Decision Records (ADRs)
+
+## Location
+
+Record durable architectural decisions in **`docs/adr/`** in the consuming repository.
+One decision per file; do not store ADRs under `docs/sdd/` or agent/rule files.
+
+Copy the template from **genai_agent_rules** `docs/adr/` when bootstrapping a project, or
+create `docs/adr/` locally and add ADRs as decisions are made.
+
+## When to Write an ADR
+
+Create or supersede an ADR when a decision is **durable**, **cross-cutting**, and would be
+costly to reverse without reading code or chat history. Strongly encouraged when any of the
+following apply:
+
+- **New patterns** — layering, module boundaries, event vs request-response, shared libraries.
+- **Explicit trade-offs** — chosen option, rejected alternatives, and why.
+- **Boundaries** — ownership between services, packages, or teams; public vs internal APIs.
+- **Stack or platform choices** — language, framework, datastore, messaging, auth model.
+- **Workflow or repo structure** — changes that affect multiple areas (e.g. plan location,
+  test layout, deployment model) beyond a single feature phase.
+
+Do **not** write an ADR for:
+
+- One-off feature facts, endpoint matrices, or incident timelines (use planning, investigation,
+  or test-report docs).
+- Decisions already captured only inside a single SDD with no reuse expectation.
+- Implementation details that do not change how future work is structured.
+
+When unsure, prefer a short ADR over burying the decision only in `docs/sdd/<slug>.md`.
+
+## Filename Convention
+
+Use a monotonic four-digit prefix and a short kebab-case slug:
+
+```txt
+docs/adr/0001-short-slug.md
+docs/adr/0002-another-topic.md
+```
+
+- Prefix: next unused number in the repo (zero-padded to four digits).
+- Slug: lowercase, hyphen-separated, max ~50 characters, no dates in the filename.
+- **Superseded** decisions: add a new ADR with a higher number; set `Status: Superseded by
+  NNNN` in the old file and link forward. Do not renumber existing files.
+
+## Required Sections
+
+Every ADR must include these headings in order:
+
+1. **Title** — `# ADR NNNN: Human-readable title` (NNNN matches the filename prefix).
+2. **Status** — `Proposed`, `Accepted`, `Deprecated`, or `Superseded by NNNN`.
+3. **Context** — forces, constraints, and background (why a decision is needed).
+4. **Decision** — what was decided, in concrete terms.
+5. **Consequences** — positive, negative, and follow-up work for implementers.
+6. **Alternatives considered** — brief list of rejected options and why.
+
+Optional: **Related** — links to SDDs (`docs/sdd/...`), other ADRs, or standards repos.
+Keep feature-specific API detail in SDDs, not here.
+
+## Agent Integration
+
+| Agent | ADR responsibility |
+|---|---|
+| `architect-planner` | Create or update ADRs when the plan introduces or changes durable architecture; link ADR paths from the SDD (e.g. Dependencies or a **Related ADRs** bullet). |
+| `phase-executor` | Implement according to **Accepted** ADRs; do not create or edit ADRs. If execution exposes a new cross-cutting decision, note it for planner or user follow-up. |
+| `doc-sync` | May add factual ADR links or status notes in planning docs when evidence exists; must not invent decisions or author new ADRs. |
+| `rule-feedback-writer` | When user feedback is a durable architectural choice, add or update an ADR; use `.cursor/rules/<category>/` per `rule-placement.mdc` for enforceable constraints, not full trade-off narratives. |
+
+SDDs under `docs/sdd/` remain the source for phased delivery; ADRs are the source for **why**
+the architecture looks the way it does across features.
+
+## Rules
+
+- Do not store secrets, credentials, or PII in ADRs.
+- Keep ADRs tech-stack agnostic unless the decision is explicitly about a stack choice.
+- Prefer updating status and adding a superseding ADR over silently editing accepted text.
