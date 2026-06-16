@@ -1,0 +1,57 @@
+---
+description: How to categorise and place .cursor/rules files by agent, language, or framework scope
+alwaysApply: false
+---
+
+# Rule Placement and Categorisation
+
+## Layout
+
+Place enforceable rules under **category subdirectories** of `.cursor/rules/`, not the root:
+
+| Category | Path pattern | Use for |
+| --- | --- | --- |
+| **Agent / workflow** | `.cursor/rules/agent/<slug>.mdc` | Subagent roles, handoffs, lifecycle, doc-sync, PR workflow, investigation/test-report structure |
+| **Language** | `.cursor/rules/language/<slug>.mdc` | Language idioms and best practices (syntax, style, typing) not tied to one framework |
+| **Framework / runtime** | `.cursor/rules/<framework-slug>/<slug>.mdc` | Stack-specific patterns: runtime version, framework APIs, ORM, test runner for that stack |
+
+Examples:
+
+```txt
+.cursor/rules/agent/workflow-boundaries.mdc
+.cursor/rules/language/typescript-strict.mdc
+.cursor/rules/node24/esm-and-imports.mdc
+.cursor/rules/nestjs/module-boundaries.mdc
+```
+
+Use lowercase kebab-case for directory and file slugs. One concern per file.
+
+## How To Categorise
+
+Apply the **most specific** category that still fits reuse scope:
+
+1. **Framework / runtime** — feedback names a framework, library, runtime version, or platform API
+   (e.g. Node 24, Express, NestJS, React, Prisma, Jest config for that stack).
+2. **Language** — feedback applies to a language across frameworks (e.g. TypeScript `strict`,
+   Python typing, error-handling idioms).
+3. **Agent / workflow** — feedback governs agent behaviour, Cursor workflow, planning docs, ADRs,
+   PR templates, or cross-stack process enforcement.
+
+When unsure between language and framework, prefer the **framework** folder if the rule only makes
+sense in that stack's context; otherwise use **language**.
+
+## Placement Rules
+
+- **Extend before create** — update an existing rule in the correct category before adding a new file.
+- **Do not flatten** — avoid new rules directly under `.cursor/rules/<slug>.mdc` in consuming repos;
+  use a category subdirectory. Legacy flat files may remain until migrated.
+- **Match siblings** — when a category directory already exists, follow its naming and frontmatter
+  conventions.
+- **ADR vs rule** — architectural trade-offs with alternatives belong in `docs/adr/`; enforceable
+  session constraints belong in the appropriate `.cursor/rules/<category>/` file.
+
+## Plugin Install Note
+
+Rules shipped by marketplace plugins (e.g. `genai-agent-workflow`) may install as flat files under
+`.cursor/rules/` until a consuming repo reorganises them. New rules authored in the repo should use
+the category layout above.

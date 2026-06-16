@@ -1,0 +1,35 @@
+{
+  "name": "genai-agent-workflow",
+  "displayName": "GenAI Agent Workflow",
+  "version": "1.3.0",
+  "description": "Framework-agnostic Cursor workflow for planned feature delivery: investigate, plan, execute, doc-sync, test, and verify. Subagents, lifecycle rules, and optional doc-sync hooks. Pair with genai-js-rules and genai-ts-rules when those plugins are added to this marketplace.",
+  "author": {
+    "name": "GenAI"
+  },
+  "publisher": "genai",
+  "homepage": "https://github.com/genai/genai_agent_rules",
+  "repository": "https://github.com/genai/genai_agent_rules",
+  "license": "MIT",
+  "logo": "../../assets/genai.svg",
+  "category": "developer-tools",
+  "keywords": [
+    "agents",
+    "workflow",
+    "subagents",
+    "planning",
+    "documentation",
+    "testing",
+    "sdd",
+    "adr"
+  ],
+  "tags": [
+    "workflow",
+    "phase-executor",
+    "doc-sync",
+    "architect-planner",
+    "test-runner"
+  ],
+  "rules": "rules/",
+  "agents": "agents/",
+  "hooks": "hooks/hooks.json"
+}
