@@ -37,7 +37,7 @@ item, include concrete steps and commands (or links to runbooks).
 - Files or keys:
 - Steps and commands:
 
-### Fabric schema changes
+### api contract upstream or Downstream changes
 - [ ] Required / Not required
 - Schema or artifact:
 - Steps and commands:
